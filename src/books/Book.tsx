@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../components/Header'
 
 const Book = () => {
   return (
-    <div>Book</div>
+    <>
+      <Header />
+    </>
   )
 }
 
