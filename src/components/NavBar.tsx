@@ -19,8 +19,9 @@ const NavLink = ({ children }: { children: ReactNode }) => (
     py={1}
     rounded={'md'}
     _hover={{
+        color: 'white',
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      bg: useColorModeValue('orange.300', 'gray.700'),
     }}
     href={'#'}>
     {children}
@@ -31,50 +32,55 @@ const NavBar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     
   return (
-    <><Box>
-    <Flex h={16} alignItems={'center'} justifyContent={'space-between'} bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')} borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        minH={'60px'}
-        py={{ base: 2 }}
-        px={{ base: 4, md: 40 }}>
-      <HStack spacing={8} alignItems={'center'}>
-        <Box 
-            fontFamily={'heading'}
-            fontWeight={'700'}
-            color={useColorModeValue('gray.800', 'white')}>Just Books</Box>
-      </HStack>
-      <HStack
-          as={'nav'}
-          spacing={4}
-          display={{ base: 'none', md: 'flex' }}>
-          {Links.map((link) => (
-            <NavLink key={link}>{link}</NavLink>
-          ))}
-        </HStack>
-      <IconButton
-        bg={useColorModeValue('white', 'gray.800')}
-        size={'lg'}
-        icon={isOpen ? <CloseIcon /> : <HamburgerIcon  w={5} h={5}/>}
-        aria-label={'Open Menu'}
-        display={{ md: 'none' }}
-        onClick={isOpen ? onClose : onOpen}
-      />
-    </Flex>
+    <>
+      <Box>
+        <Flex
+          h={16}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+          bg={useColorModeValue('white', 'gray.800')}
+          color={useColorModeValue('gray.600', 'white')}
+          borderBottom={1}
+          borderStyle={'solid'}
+          borderColor={useColorModeValue('gray.200', 'gray.900')}
+          minH={'60px'}
+          py={{ base: 2 }}
+          px={{ base: 4, md: 40 }}
+        >
+          <HStack spacing={8} alignItems={'center'}>
+            <Box fontFamily={'heading'} fontWeight={'bold'} fontSize={'1.2rem'}>
+              <Link href={'/'} _hover={{
+                textDecoration:'none'
+              }}>JUST BOOKS</Link>
+            </Box>
+          </HStack>
+          <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+            {Links.map((link) => (
+              <NavLink key={link}>{link}</NavLink>
+            ))}
+          </HStack>
+          <IconButton
+            bg={useColorModeValue('white', 'gray.800')}
+            size={'lg'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon w={5} h={5} />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+          />
+        </Flex>
 
-    {isOpen ? (
-      <Box pb={4} display={{ md: 'none' }}>
-        <Stack as={'nav'} spacing={4} align={'center'}>
-          {Links.map((link) => (
-            <NavLink key={link}>{link}</NavLink>
-          ))}
-        </Stack>
+        {isOpen ? (
+          <Box pb={4} display={{ md: 'none' }}>
+            <Stack as={'nav'} spacing={4} align={'center'}>
+              {Links.map((link) => (
+                <NavLink key={link}>{link}</NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
-    ) : null}
-  </Box>
-</>
-  )
+    </>
+  );
 }
 
 export default NavBar

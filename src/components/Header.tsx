@@ -36,7 +36,7 @@ import {
                 base: "bold",
                 md: "extrabold",
               }}
-              color="gray.900"
+              color="gray.700"
               _dark={{
                 color: "gray.100",
               }}
