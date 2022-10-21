@@ -1,9 +1,24 @@
-import React from 'react'
+import React from 'react';
 
 const Login = () => {
-  return (
-    <div>Login</div>
-  )
-}
+  const Login = () => {
+    // try {
+    //   const { data } = await login({
+    //     username: username,
+    //     password: password,
+    //   });
+    //   if (data) {
+    //     //Save user and token to LocalSTorage
+    //     authenticate(data);
+    //     window.location.reload();
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   if (err.response.status === 400) message.error(err.response.data, 4);
+    // }
+  };
 
-export default Login
+  return <div>Login</div>;
+};
+
+export default Login;

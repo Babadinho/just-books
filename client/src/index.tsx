@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import 'antd/dist/antd.min.css';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
 
@@ -14,4 +15,3 @@ root.render(
     </ChakraProvider>
   </React.StrictMode>
 );
-

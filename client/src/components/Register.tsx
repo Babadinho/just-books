@@ -1,60 +1,75 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Stack,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-  } from '@chakra-ui/react';
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { message } from 'antd';
+import { authenticate, register } from '../actions/auth';
+import { UserContext } from '../UserContext';
 
 const Register = () => {
-    const [values, setValues] = useState({
-        username: '',
-        password: '',
-        confirm_password: ''
-      });
-      
-      const { username, password, confirm_password } = values;
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
+  const [values, setValues] = useState({
+    _id: '',
+    username: '',
+    password: '',
+    confirm_password: '',
+  });
+  const [loading, setLoading] = useState(false);
 
-      const handleChange = (name: string) => (e: { target: { value: any; }; }) => {
-        setValues({ ...values, [name]: e.target.value });
-      };
-    
-      const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        // try {
-        //   const { data } = await login({
-        //     username: username,
-        //     password: password,
-        //   });
-        //   if (data) {
-        //     //Save user and token to LocalSTorage
-        //     authenticate(data);
-        //     window.location.reload();
-        //   }
-        // } catch (err) {
-        //   console.log(err);
-        //   if (err.response.status === 400) message.error(err.response.data, 4);
-        // }
-      };
+  const { username, password, confirm_password } = values;
+
+  const handleChange = (name: string) => (e: { target: { value: any } }) => {
+    setValues({ ...values, [name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (password !== confirm_password) {
+      return message.error('Password does not match!', 4);
+    }
+    try {
+      const res = await register({
+        username: username,
+        password: password,
+      });
+      setLoading(true);
+      if (res.data) {
+        authenticate(res.data);
+        setTimeout(() => {
+          setValues({
+            ...values,
+            _id: res.data._id,
+            username: res.data.username,
+            password: '',
+          });
+          message.success('Registration successfull!', 4);
+          setUser(res.data);
+          navigate('/');
+        }, 2000);
+      }
+    } catch (error: any) {
+      message.error(error.response.data, 4);
+      setLoading(false);
+    }
+  };
 
   return (
     <>
-      <Flex
-        minH={'80vh'}
-        align={'center'}
-        justify={'center'}
-      >
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      <Flex minH={'80vh'} align={'center'} justify={'center'}>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} w={'60vh'}>
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'}>
-              Register an Account
-            </Heading>
+            <Heading fontSize={'3xl'}>Register an Account</Heading>
             <Text fontSize={'1xl'} color={'gray.600'} align={'center'}>
               An account lets you add your books to your favourite list.
             </Text>
@@ -100,7 +115,13 @@ const Register = () => {
                     bg: 'orange.600',
                   }}
                 >
-                  Register
+                  {loading ? (
+                    <div className='spinner-border text-light' role='status'>
+                      <span className='sr-only'>Loading...</span>
+                    </div>
+                  ) : (
+                    'Register'
+                  )}
                 </Button>
               </Stack>
             </Stack>
@@ -108,7 +129,7 @@ const Register = () => {
         </Stack>
       </Flex>
     </>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

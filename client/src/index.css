@@ -12,8 +12,17 @@ code {
     monospace;
 }
 
+.logo:hover {
+  text-decoration: none;
+  color: #4a5568;
+}
+
 .nav_link {
   position: relative;
+}
+
+.nav_link:hover {
+  color: #4a5568;
 }
 
 .nav_link::after {
@@ -33,4 +42,8 @@ code {
 
 .fa-solid {
   color: #dd6b20;;
+}
+
+.fa-book {
+  font-size: 1.15rem;
 }

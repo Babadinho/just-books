@@ -1,27 +1,16 @@
-import { ReactNode } from 'react';
-import {
-  Box,
-  Flex,
-  HStack,
-  Link,
-  useColorModeValue
-} from '@chakra-ui/react';
+import { Box, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react';
+import { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { isAuthenticated } from '../actions/auth';
+import { UserContext } from '../UserContext';
 
-const authenticated = ['My Books'];
-const notAuthenticated = ['Login', 'Register'];
+const NavBar = () => {
+  const { user } = useContext(UserContext);
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    _hover={{
-      textDecoration: 'none',
-    }}>
-    {children}
-  </Link>
-);
+  useEffect(() => {
+    localStorage.getItem('just-books');
+  }, [user]);
 
-const NavBar = () => {   
   return (
     <>
       <Box>
@@ -39,21 +28,49 @@ const NavBar = () => {
           px={{ base: 4, md: 40 }}
         >
           <HStack spacing={8} alignItems={'center'}>
-            <Box fontFamily={'heading'} fontWeight={'bold'} fontSize={'1.4rem'} color="gray.700">
-              <Link href={'/'} _hover={{
-                textDecoration:'none'
-              }}><i className="fa-solid fa-book"></i>{' '}Just Books</Link>
+            <Box
+              fontFamily={'heading'}
+              fontWeight={'bold'}
+              fontSize={'1.4rem'}
+              color='gray.700'
+            >
+              <Link to='/' className='logo'>
+                <Flex alignItems={'center'}>
+                  <i className='fa-solid fa-book'></i>{' '}
+                  <Text ml='1'>Just Books</Text>
+                </Flex>
+              </Link>
             </Box>
           </HStack>
-          <HStack as={'nav'} spacing={4} display={'flex'} fontWeight={'600'}>
-            <NavLink><Link className={'nav_link'} href={'/login'} _hover={{textDecoration: 'none'}}><i className="fa-solid fa-bookmark"></i>{' '}My Books</Link></NavLink>
-            <NavLink><Link className={'nav_link'} href={'/login'} _hover={{textDecoration: 'none'}}>{' '}Login</Link></NavLink>
-            <NavLink><Link className={'nav_link'} href={'/register'} _hover={{textDecoration: 'none'}}>{' '}Register</Link></NavLink>
+          <HStack
+            as={'nav'}
+            spacing={7}
+            display={'flex'}
+            fontWeight={'600'}
+            fontSize={{ base: 'sm', md: 'md' }}
+          >
+            {isAuthenticated() && (
+              <Link className='nav_link' to='/my-books'>
+                <i className='fa-solid fa-bookmark'></i> My Books
+              </Link>
+            )}
+            {!isAuthenticated() && (
+              <>
+                <Link className='nav_link' to='/login'>
+                  {' '}
+                  Login
+                </Link>
+                <Link className={'nav_link'} to='/register'>
+                  {' '}
+                  Register
+                </Link>
+              </>
+            )}
           </HStack>
         </Flex>
       </Box>
     </>
   );
-}
+};
 
-export default NavBar
+export default NavBar;
