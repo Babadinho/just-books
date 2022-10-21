@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Book from './books/Book';
+import Books from './books/Books';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Register from './components/Register';
@@ -22,7 +22,7 @@ const App = () => {
       <UserContext.Provider value={value}>
         <NavBar />
         <Routes>
-          <Route path='/' element={<Book />} />
+          <Route path='/' element={<Books />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>

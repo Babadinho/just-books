@@ -1,17 +1,23 @@
+import { Search2Icon } from '@chakra-ui/icons';
 import {
   chakra,
   Box,
+  IconButton,
   SimpleGrid,
   GridItem,
   VisuallyHidden,
   Input,
   Button,
   Stack,
+  InputLeftElement,
+  InputGroup,
+  InputRightElement,
+  Select,
 } from '@chakra-ui/react';
 
 const Header = () => {
   return (
-    <Box px={4} py={{ base: 27, md: 28 }} mx='auto'>
+    <Box px={4} py={{ base: '3rem', md: 28 }} mx='auto'>
       <Box
         w={{
           base: 'full',
@@ -34,9 +40,9 @@ const Header = () => {
             base: 'bold',
             md: 'extrabold',
           }}
-          color='gray.700'
+          color='orange.500'
           _dark={{
-            color: 'gray.100',
+            color: 'orange.100',
           }}
           lineHeight='shorter'
         >
@@ -45,10 +51,10 @@ const Header = () => {
         <chakra.p
           mb={6}
           fontSize={{
-            base: 'lg',
+            base: '1.1rem',
             md: 'xl',
           }}
-          color='gray.500'
+          color='gray.600'
           lineHeight='base'
         >
           Search for books anywhere, you can search for books using the book
@@ -61,69 +67,45 @@ const Header = () => {
             base: 'full',
             md: 7 / 12,
           }}
-          columns={{
-            base: 1,
-            lg: 6,
-          }}
-          spacing={3}
-          pt={1}
+          spacing={1}
+          pt={8}
           mx='auto'
           mb={8}
         >
-          <GridItem
-            as='label'
-            colSpan={{
-              base: 'auto',
-              lg: 4,
-            }}
-          >
-            <VisuallyHidden>Your Email</VisuallyHidden>
+          <InputGroup size='lg'>
+            {/* <InputLeftElement
+              color='gray.700'
+              mx='auto'
+              children={
+                <Select placeholder='Search by' border='none'>
+                  <option value='option1'>Option 1</option>
+                  <option value='option2'>Option 2</option>
+                  <option value='option3'>Option 3</option>
+                </Select>
+              }
+            /> */}
             <Input
-              mt={0}
-              size='lg'
-              type='email'
-              placeholder='Enter your email...'
-              required
+              placeholder='Enter book or author name...'
+              focusBorderColor='orange.500'
             />
-          </GridItem>
-          <Button
-            as={GridItem}
-            w='full'
-            bg='orange.500'
-            variant='solid'
-            _hover={{
-              bg: 'orange.600',
-            }}
-            colSpan={{
-              base: 'auto',
-              lg: 2,
-            }}
-            size='lg'
-            type='submit'
-            colorScheme='brand'
-            cursor='pointer'
-          >
-            Get Started
-          </Button>
+            <InputRightElement
+              children={
+                <IconButton
+                  borderTopLeftRadius={0}
+                  borderBottomLeftRadius={0}
+                  bg='orange.500'
+                  color='white'
+                  size='lg'
+                  _hover={{
+                    bg: 'orange.600',
+                  }}
+                  aria-label='Search database'
+                  icon={<Search2Icon />}
+                />
+              }
+            />
+          </InputGroup>
         </SimpleGrid>
-        <Stack
-          display='flex'
-          direction={{
-            base: 'column',
-            md: 'row',
-          }}
-          justifyContent={{
-            base: 'start',
-            md: 'center',
-          }}
-          mb={3}
-          spacing={{
-            base: 2,
-            md: 8,
-          }}
-          fontSize='xs'
-          color='gray.600'
-        ></Stack>
       </Box>
     </Box>
   );

@@ -54,38 +54,37 @@ exports.register = async (req, res) => {
   }
 };
 
-// exports.login = async (req, res) => {
-//   const { username, password } = req.body;
-//   //validation
-//   if (!username || !password)
-//     return res.status(400).send('All fields are required');
+exports.login = async (req, res) => {
+  const { username, password } = req.body;
+  //validation
+  if (!username || !password)
+    return res.status(400).send('All fields are required');
 
-//   try {
-//     let user = await User.findOne({ username }).exec();
-//     if (!user)
-//       return res.status(400).send('User with that username does not exist');
+  try {
+    let user = await User.findOne({ username }).exec();
+    if (!user)
+      return res.status(400).send('User with that username does not exist');
 
-//     //match password
-//     bcrypt.compare(password, user.password, function (err, match) {
-//       if (!match || err) {
-//         return res.status(400).send('Password is incorrect');
-//       }
-//       console.log('password match', match);
-//       //Generate jwt signed token and send as reponse to client
-//       let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-//         expiresIn: '7d',
-//       });
+    //match password
+    bcrypt.compare(password, user.password, function (err, match) {
+      if (!match || err) {
+        return res.status(400).send('Password is incorrect');
+      }
+      //Generate jwt signed token and send as reponse to client
+      let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: '7d',
+      });
 
-//       return res.json({
-//         token,
-//         user: {
-//           _id: user._id,
-//           username: user.username,
-//         },
-//       });
-//     });
-//   } catch (err) {
-//     console.log('Login Error', err);
-//     res.status(400).send('Login failed. try again');
-//   }
-// };
+      return res.json({
+        token,
+        user: {
+          _id: user._id,
+          username: user.username,
+        },
+      });
+    });
+  } catch (err) {
+    console.log('Login Error', err);
+    res.status(400).send('Login failed. try again');
+  }
+};

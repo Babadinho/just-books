@@ -32,22 +32,25 @@ const NavBar = () => {
               fontFamily={'heading'}
               fontWeight={'bold'}
               fontSize={'1.4rem'}
-              color='gray.700'
+              color='gray.600'
+              _dark={{
+                color: 'gray.100',
+              }}
             >
               <Link to='/' className='logo'>
                 <Flex alignItems={'center'}>
                   <i className='fa-solid fa-book'></i>{' '}
-                  <Text ml='1'>Just Books</Text>
+                  <Text ml='1'>Justbooks</Text>
                 </Flex>
               </Link>
             </Box>
           </HStack>
           <HStack
             as={'nav'}
-            spacing={7}
+            spacing={6}
             display={'flex'}
             fontWeight={'600'}
-            fontSize={{ base: 'sm', md: 'md' }}
+            fontSize={{ base: '0.9rem', md: 'md' }}
           >
             {isAuthenticated() && (
               <Link className='nav_link' to='/my-books'>

@@ -47,3 +47,11 @@ code {
 .fa-book {
   font-size: 1.15rem;
 }
+
+.ant-message .anticon {
+  top: -0.2rem !important;
+}
+
+*:focus {
+  outline: none;
+}

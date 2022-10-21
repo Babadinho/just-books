@@ -69,9 +69,11 @@ const Register = () => {
       <Flex minH={'80vh'} align={'center'} justify={'center'}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} w={'60vh'}>
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'}>Register an Account</Heading>
+            <Heading fontSize={'3xl'} color={'orange.500'}>
+              Register an Account
+            </Heading>
             <Text fontSize={'1xl'} color={'gray.600'} align={'center'}>
-              An account lets you add your books to your favourite list.
+              An account lets you add your favourite books to your list
             </Text>
           </Stack>
           <Box
@@ -80,13 +82,14 @@ const Register = () => {
             boxShadow={'lg'}
             p={8}
           >
-            <Stack spacing={4}>
+            <Stack spacing={4} color='gray.600'>
               <FormControl id='username'>
                 <FormLabel>Username</FormLabel>
                 <Input
                   type='text'
                   value={username}
                   onChange={handleChange('username')}
+                  focusBorderColor='orange.500'
                 />
               </FormControl>
               <FormControl id='password'>
@@ -95,6 +98,7 @@ const Register = () => {
                   type='password'
                   value={password}
                   onChange={handleChange('password')}
+                  focusBorderColor='orange.500'
                 />
               </FormControl>
               <FormControl id='confirm_password'>
@@ -103,6 +107,7 @@ const Register = () => {
                   type='password'
                   value={confirm_password}
                   onChange={handleChange('confirm_password')}
+                  focusBorderColor='orange.500'
                 />
               </FormControl>
               <Stack spacing={10} onClick={handleSubmit}>
