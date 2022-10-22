@@ -17,7 +17,7 @@ import {
 
 const Header = () => {
   return (
-    <Box px={4} py={{ base: '3rem', md: 28 }} mx='auto'>
+    <Box px={4} py={{ base: '3rem', md: 24 }} mx='auto'>
       <Box
         w={{
           base: 'full',

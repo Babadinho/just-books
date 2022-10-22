@@ -50,7 +50,7 @@ const NavBar = () => {
             spacing={6}
             display={'flex'}
             fontWeight={'600'}
-            fontSize={{ base: '0.9rem', md: 'md' }}
+            fontSize={{ base: '0.9rem', md: '0.9rem' }}
           >
             {isAuthenticated() && (
               <Link className='nav_link' to='/my-books'>
