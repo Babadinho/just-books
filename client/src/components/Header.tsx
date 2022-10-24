@@ -4,20 +4,21 @@ import {
   Box,
   IconButton,
   SimpleGrid,
-  GridItem,
-  VisuallyHidden,
   Input,
-  Button,
-  Stack,
-  InputLeftElement,
   InputGroup,
   InputRightElement,
-  Select,
 } from '@chakra-ui/react';
 
 const Header = () => {
   return (
-    <Box px={4} py={{ base: '3rem', md: 24 }} mx='auto'>
+    <Box
+      px={4}
+      pt={{ base: '3rem', md: '6rem' }}
+      pb={{ base: '0.5rem', md: '0.5rem' }}
+      mb='3rem'
+      mx='auto'
+      bgGradient='linear(to-b, orange.50, #fdfdfc)'
+    >
       <Box
         w={{
           base: 'full',
@@ -73,20 +74,10 @@ const Header = () => {
           mb={8}
         >
           <InputGroup size='lg'>
-            {/* <InputLeftElement
-              color='gray.700'
-              mx='auto'
-              children={
-                <Select placeholder='Search by' border='none'>
-                  <option value='option1'>Option 1</option>
-                  <option value='option2'>Option 2</option>
-                  <option value='option3'>Option 3</option>
-                </Select>
-              }
-            /> */}
             <Input
               placeholder='Enter book or author name...'
               focusBorderColor='orange.500'
+              background='white'
             />
             <InputRightElement
               children={

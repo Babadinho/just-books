@@ -51,7 +51,7 @@ const Books = () => {
         </chakra.h1>
         <SimpleGrid
           minChildWidth={{ base: 'auto', md: '22rem' }}
-          spacing='1.4rem'
+          spacing='2rem'
         >
           {books &&
             books.length > 0 &&

@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Books from './books/Books';
+import ViewBook from './books/ViewBook';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Register from './components/Register';
@@ -25,6 +26,7 @@ const App = () => {
           <Route path='/' element={<Books />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/book/:bookId' element={<ViewBook />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>

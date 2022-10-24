@@ -25,7 +25,7 @@ const NavBar = () => {
           borderColor={useColorModeValue('gray.200', 'gray.900')}
           minH={'60px'}
           py={{ base: 2 }}
-          px={{ base: 4, md: 40 }}
+          px={{ base: 4, md: 20, xl: 40 }}
         >
           <HStack spacing={8} alignItems={'center'}>
             <Box
