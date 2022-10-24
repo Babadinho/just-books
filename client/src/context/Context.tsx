@@ -6,3 +6,10 @@ interface userInterface {
 }
 
 export const UserContext = createContext<Partial<userInterface>>({});
+
+interface bookInterface {
+  books: any;
+  setBooks: any;
+}
+
+export const BookContext = createContext<Partial<bookInterface>>({});

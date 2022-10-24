@@ -9,7 +9,7 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 
-const Header = () => {
+const Header = ({ ...props }) => {
   return (
     <Box
       px={4}
@@ -63,6 +63,7 @@ const Header = () => {
           select search criteria.
         </chakra.p>
         <SimpleGrid
+          onSubmit={props.handleSearch}
           as='form'
           w={{
             base: 'full',
@@ -78,10 +79,13 @@ const Header = () => {
               placeholder='Enter book or author name...'
               focusBorderColor='orange.500'
               background='white'
+              value={props.value}
+              onChange={(e) => props.setValue(e.target.value)}
             />
             <InputRightElement
               children={
                 <IconButton
+                  onClick={props.handleSearch}
                   borderTopLeftRadius={0}
                   borderBottomLeftRadius={0}
                   bg='orange.500'

@@ -2,10 +2,21 @@ import { Box, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
-import { UserContext } from '../UserContext';
+import { getBooks } from '../actions/book';
+import { UserContext, BookContext } from '../context/Context';
 
 const NavBar = () => {
   const { user } = useContext(UserContext);
+  const { setBooks } = useContext(BookContext);
+
+  const loadBooks = async () => {
+    try {
+      let res = await getBooks();
+      setBooks(res.data.items);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     localStorage.getItem('just-books');
@@ -37,7 +48,7 @@ const NavBar = () => {
                 color: 'gray.100',
               }}
             >
-              <Link to='/' className='logo'>
+              <Link to='/' className='logo' onClick={loadBooks}>
                 <Flex alignItems={'center'}>
                   <i className='fa-solid fa-book'></i>{' '}
                   <Text ml='1'>Justbooks</Text>

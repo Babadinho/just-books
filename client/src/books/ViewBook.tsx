@@ -259,7 +259,7 @@ const ViewBook = () => {
               </Box>
               <Box>
                 <Flex justifyContent='space-between' alignItems='center'>
-                  {accessInfo.epub.isAvailable && (
+                  {accessInfo.epub && accessInfo.epub.isAvailable && (
                     <Tooltip
                       hasArrow
                       label='Download EPUB'
@@ -283,7 +283,7 @@ const ViewBook = () => {
                     </Tooltip>
                   )}
 
-                  {accessInfo.pdf.isAvailable && (
+                  {accessInfo.pdf && accessInfo.pdf.isAvailable && (
                     <Tooltip
                       hasArrow
                       label='Download PDF'

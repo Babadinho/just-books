@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { message } from 'antd';
 import { authenticate, register } from '../actions/auth';
-import { UserContext } from '../UserContext';
+import { UserContext } from '../context/Context';
 
 const Register = () => {
   const { setUser } = useContext(UserContext);
