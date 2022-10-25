@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import { Search2Icon } from '@chakra-ui/icons';
+import { useState } from 'react';
 import {
   chakra,
   Box,
@@ -7,15 +9,29 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Text,
 } from '@chakra-ui/react';
 
 const Header = ({ ...props }) => {
+  const navigate = useNavigate();
+  const [value, setValue] = useState<string>('');
+  const [isError, setIsError] = useState<boolean>(false);
+
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    if (value === '') {
+      e.preventDefault();
+      setIsError(true);
+      return;
+    }
+    navigate(`/search/?q=${value}&orderBy=relevance&filterBy=`);
+  };
+
   return (
     <Box
       px={4}
       pt={{ base: '3rem', md: '6rem' }}
       pb={{ base: '0.5rem', md: '0.5rem' }}
-      mb='3rem'
+      mb='2rem'
       mx='auto'
       bgGradient='linear(to-b, orange.50, #fdfdfc)'
     >
@@ -63,8 +79,7 @@ const Header = ({ ...props }) => {
           select search criteria.
         </chakra.p>
         <SimpleGrid
-          onSubmit={props.handleSearch}
-          as='form'
+          // as='form'
           w={{
             base: 'full',
             md: 7 / 12,
@@ -73,19 +88,31 @@ const Header = ({ ...props }) => {
           pt={8}
           mx='auto'
           mb={8}
+          // onSubmit={handleSubmit}
         >
           <InputGroup size='lg'>
             <Input
               placeholder='Enter book or author name...'
-              focusBorderColor='orange.500'
+              focusBorderColor='white'
+              borderColor='white'
+              outlineColor={isError ? 'red.400' : 'orange.500'}
               background='white'
-              value={props.value}
-              onChange={(e) => props.setValue(e.target.value)}
+              fontSize='md'
+              value={value}
+              isRequired
+              onChange={(e) => {
+                setValue(e.target.value);
+                setIsError(false);
+              }}
+              _hover={{
+                focusBorderColor: 'white',
+              }}
+              // onSubmit={handleSubmit}
             />
             <InputRightElement
               children={
                 <IconButton
-                  onClick={props.handleSearch}
+                  onClick={handleSubmit}
                   borderTopLeftRadius={0}
                   borderBottomLeftRadius={0}
                   bg='orange.500'
@@ -100,6 +127,11 @@ const Header = ({ ...props }) => {
               }
             />
           </InputGroup>
+          {isError && (
+            <Text align='left' fontSize='0.8rem' color='red' pt='0.5rem'>
+              Search field cannot be empty
+            </Text>
+          )}
         </SimpleGrid>
       </Box>
     </Box>

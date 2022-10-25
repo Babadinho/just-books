@@ -6,33 +6,33 @@ import Header from '../components/Header';
 import { BookContext } from '../context/Context';
 
 const Books = () => {
-  const { books, setBooks } = useContext(BookContext);
-  const [search, setSearch] = useState<any | null>([]);
-  const [bookCount, setBookCount] = useState<number>();
-  const [value, setValue] = useState<string>('');
-  const [searchString, setSearchString] = useState<string>('');
+  const { books } = useContext(BookContext);
+  // const [search, setSearch] = useState<any | null>([]);
+  // const [bookCount, setBookCount] = useState<number>();
+  // const [value, setValue] = useState<string>('');
+  // const [searchString, setSearchString] = useState<string>('');
 
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSearchString(value);
-    try {
-      let res = await searchBook(value);
-      setBooks('');
-      setValue('');
-      setSearch(res.data.items);
-      setBookCount(res.data.totalItems);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setSearchString(value);
+  //   try {
+  //     let res = await searchBook(value);
+  //     setBooks('');
+  //     setValue('');
+  //     setSearch(res.data.items);
+  //     setBookCount(res.data.totalItems);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
       <Header
-        value={value}
-        search={search}
-        setValue={setValue}
-        handleSearch={handleSearch}
+      // value={value}
+      // search={search}
+      // setValue={setValue}
+      // handleSearch={handleSearch}
       />
       <Box
         as='main'
@@ -58,11 +58,11 @@ const Books = () => {
           lineHeight='shorter'
           textAlign={'center'}
         >
-          {!books && search && search.length > 0 && (
+          {/* {!books && search && search.length > 0 && (
             <Text>
               {bookCount} Search results for '{searchString}'
             </Text>
-          )}
+          )} */}
           {books && (
             <Text>
               <i className='fa-solid fa-star'></i> Trending books
@@ -78,11 +78,11 @@ const Books = () => {
             books.map((book: any, i: any) => {
               return <BookCard {...book} key={i} />;
             })}
-          {search &&
+          {/* {search &&
             search.length > 0 &&
             search.map((book: any, i: any) => {
               return <BookCard {...book} key={i} />;
-            })}
+            })} */}
         </SimpleGrid>
       </Box>
     </>

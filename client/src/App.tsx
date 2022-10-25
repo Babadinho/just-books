@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { getBooks } from './actions/book';
 import Books from './books/Books';
+import SearchBooks from './books/SearchBooks';
 import ViewBook from './books/ViewBook';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
@@ -39,6 +40,7 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route path='/' element={<Books />} />
+            <Route path='/search' element={<SearchBooks />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
             <Route path='/book/:bookId' element={<ViewBook />} />
