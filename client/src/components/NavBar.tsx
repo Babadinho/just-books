@@ -50,7 +50,7 @@ const NavBar = () => {
             >
               <Link to='/' className='logo' onClick={loadBooks}>
                 <Flex alignItems={'center'}>
-                  <i className='fa-solid fa-book'></i>{' '}
+                  <i className='fa-solid fa-book logo-book'></i>{' '}
                   <Text ml='1'>Justbooks</Text>
                 </Flex>
               </Link>

@@ -114,6 +114,7 @@ const Register = () => {
                 <Button
                   loadingText='Submitting'
                   size='lg'
+                  fontWeight='500'
                   bg={'orange.500'}
                   color={'white'}
                   _hover={{

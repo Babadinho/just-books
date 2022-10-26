@@ -15,8 +15,8 @@ import {
   RadioGroup,
   Stack,
   Flex,
+  HStack,
   Select,
-  Button,
 } from '@chakra-ui/react';
 import BookCard from '../components/BookCard';
 import { Search2Icon } from '@chakra-ui/icons';
@@ -28,15 +28,13 @@ const SearchBooks = () => {
   const [value, setValue] = useState<any>('');
   const [order, setOrder] = useState('relevance');
   const [filter, setFilter] = useState('');
-  const [start, setStart] = useState<number>(0);
-  const [max, setMax] = useState<number>(21);
   const [isError, setIsError] = useState<boolean>(false);
 
   const { q, orderBy, filterBy } = queryString.parse(window.location.search);
 
   const loadSearch = async () => {
     try {
-      let res = await searchBook(q, orderBy, filterBy, start);
+      let res = await searchBook(q, orderBy, filterBy);
       setSearch(res.data.items);
       setValue(q);
       setBookCount(res.data.totalItems);
@@ -51,42 +49,14 @@ const SearchBooks = () => {
       setIsError(true);
       return;
     }
-    setStart(0);
-    setMax(21);
-    setOrder('relevance');
-    setFilter('');
-    navigate(
-      `/search/?q=${value}&orderBy=relevance&filterBy=&startIndex=0&maxResults=21`
-    );
+    navigate(`/search/?q=${value}&orderBy=relevance&filterBy=`);
     setFilter('');
   };
 
   useEffect(() => {
     loadSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [q, order, filter, start, max]);
-
-  const handlePrevious = () => {
-    let new_start = start - 21;
-    setStart(new_start);
-    let new_max = max - 21;
-    setMax(new_max);
-
-    navigate(
-      `/search/?q=${value}&orderBy=${order}&filterBy=${filter}&startIndex=${new_start}&maxResults=21`
-    );
-  };
-
-  const handleNext = () => {
-    let new_start = max;
-    let new_max = max + 21;
-    setStart(new_start);
-    setMax(new_max);
-
-    navigate(
-      `/search/?q=${value}&orderBy=${order}&filterBy=${filter}&startIndex=${new_start}&maxResults=21`
-    );
-  };
+  }, [q, order, filter]);
 
   return (
     <>
@@ -210,10 +180,8 @@ const SearchBooks = () => {
               value={filter}
               onChange={(e) => {
                 setFilter(e.target.value);
-                setStart(0);
-                setMax(21);
                 navigate(
-                  `/search/?q=${value}&orderBy=${order}&filterBy=${e.target.value}&startIndex=0&maxResults=21`
+                  `/search/?q=${value}&orderBy=${order}&filterBy=${e.target.value}`
                 );
               }}
             >
@@ -228,10 +196,8 @@ const SearchBooks = () => {
           <RadioGroup
             onChange={(order) => {
               setOrder(order);
-              setStart(0);
-              setMax(21);
               navigate(
-                `/search/?q=${value}&orderBy=${order}&filterBy=${filter}&startIndex=0&maxResults=21`
+                `/search/?q=${value}&orderBy=${order}&filterBy=${filter}`
               );
             }}
             value={order}
@@ -247,7 +213,7 @@ const SearchBooks = () => {
             </Stack>
           </RadioGroup>
         </Flex>
-        {search && search.length === 0 && (
+        {search.length == 0 && (
           <Flex
             flexDir='column'
             textAlign='center'
@@ -265,7 +231,6 @@ const SearchBooks = () => {
         <SimpleGrid
           minChildWidth={{ base: 'auto', md: '22rem' }}
           spacing='2rem'
-          mb='2rem'
         >
           {search &&
             search.length > 0 &&
@@ -273,50 +238,6 @@ const SearchBooks = () => {
               return <BookCard {...book} key={i} />;
             })}
         </SimpleGrid>
-
-        {bookCount && (
-          <Flex justifyContent='space-between'>
-            <Box>
-              {start > 0 && (
-                <Button
-                  size='sm'
-                  fontWeight='500'
-                  bg={'orange.500'}
-                  color={'white'}
-                  rounded='sm'
-                  _hover={{
-                    bg: 'orange.600',
-                  }}
-                  onClick={handlePrevious}
-                >
-                  <Box>
-                    <Flex alignItems='center'>&lt; Previous page</Flex>
-                  </Box>
-                </Button>
-              )}
-            </Box>
-            <Box>
-              {max < bookCount && (
-                <Button
-                  alignSelf='flex-end'
-                  size='sm'
-                  fontWeight='500'
-                  bg={'orange.500'}
-                  rounded='sm'
-                  color={'white'}
-                  _hover={{
-                    bg: 'orange.600',
-                  }}
-                  onClick={handleNext}
-                >
-                  <Box>
-                    <Flex alignItems='center'>Next page &gt;</Flex>
-                  </Box>
-                </Button>
-              )}
-            </Box>
-          </Flex>
-        )}
       </Box>
     </>
   );

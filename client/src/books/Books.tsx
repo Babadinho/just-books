@@ -1,4 +1,4 @@
-import { Box, chakra, Text, SimpleGrid } from '@chakra-ui/react';
+import { Box, chakra, Text, SimpleGrid, Flex } from '@chakra-ui/react';
 import { useState, useEffect, useContext } from 'react';
 import { searchBook, getBooks } from '../actions/book';
 import BookCard from '../components/BookCard';
@@ -7,6 +7,8 @@ import { BookContext } from '../context/Context';
 
 const Books = () => {
   const { books } = useContext(BookContext);
+  // const [books, setBooks] = useState<any | null>(null);
+  // const [loading, setLoading] = useState()
   // const [search, setSearch] = useState<any | null>([]);
   // const [bookCount, setBookCount] = useState<number>();
   // const [value, setValue] = useState<string>('');
@@ -25,6 +27,19 @@ const Books = () => {
   //     console.log(error);
   //   }
   // };
+
+  // const loadBooks = async () => {
+  //   try {
+  //     let res = await getBooks();
+  //     setBooks(res.data.items);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   loadBooks();
+  // }, []);
 
   return (
     <>
@@ -69,6 +84,21 @@ const Books = () => {
             </Text>
           )}
         </chakra.h1>
+        {!books && (
+          <Flex
+            flexDir='column'
+            textAlign='center'
+            justifyContent='center'
+            mt='4rem'
+          >
+            <Text fontSize='4rem'>
+              <i className='fa-solid fa-book'></i>
+            </Text>
+            <Text fontSize='1.5rem' color='orange.500'>
+              Loading books.....
+            </Text>
+          </Flex>
+        )}
         <SimpleGrid
           minChildWidth={{ base: 'auto', md: '22rem' }}
           spacing='2rem'
@@ -78,11 +108,6 @@ const Books = () => {
             books.map((book: any, i: any) => {
               return <BookCard {...book} key={i} />;
             })}
-          {/* {search &&
-            search.length > 0 &&
-            search.map((book: any, i: any) => {
-              return <BookCard {...book} key={i} />;
-            })} */}
         </SimpleGrid>
       </Box>
     </>

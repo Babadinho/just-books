@@ -23,7 +23,9 @@ const Header = ({ ...props }) => {
       setIsError(true);
       return;
     }
-    navigate(`/search/?q=${value}&orderBy=relevance&filterBy=`);
+    navigate(
+      `/search/?q=${value}&orderBy=relevance&filterBy=&startIndex=0&maxResults=21`
+    );
   };
 
   return (
