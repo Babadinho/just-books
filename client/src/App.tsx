@@ -4,6 +4,7 @@ import { getBooks } from './actions/book';
 import Books from './books/Books';
 import SearchBooks from './books/SearchBooks';
 import ViewBook from './books/ViewBook';
+import Footer from './components/Footer';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Register from './components/Register';
@@ -45,6 +46,7 @@ const App = () => {
             <Route path='/register' element={<Register />} />
             <Route path='/book/:bookId' element={<ViewBook />} />
           </Routes>
+          <Footer />
         </BookContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>

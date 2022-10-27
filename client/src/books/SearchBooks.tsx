@@ -89,7 +89,7 @@ const SearchBooks = () => {
   };
 
   return (
-    <>
+    <Box>
       <Box
         px={4}
         pt={{ base: '2rem', md: '2rem' }}
@@ -296,7 +296,7 @@ const SearchBooks = () => {
               )}
             </Box>
             <Box>
-              {max < bookCount && (
+              {search !== undefined && (
                 <Button
                   alignSelf='flex-end'
                   size='sm'
@@ -318,7 +318,7 @@ const SearchBooks = () => {
           </Flex>
         )}
       </Box>
-    </>
+    </Box>
   );
 };
 
