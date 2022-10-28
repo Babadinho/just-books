@@ -11,6 +11,7 @@ import {
   InputRightElement,
   Text,
 } from '@chakra-ui/react';
+import { message } from 'antd';
 
 const Header = ({ ...props }) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const Header = ({ ...props }) => {
     if (value === '') {
       e.preventDefault();
       setIsError(true);
+      message.error('Search field cannot be empty', 4);
       return;
     }
     navigate(
@@ -129,11 +131,6 @@ const Header = ({ ...props }) => {
               }
             />
           </InputGroup>
-          {isError && (
-            <Text align='left' fontSize='0.8rem' color='red' pt='0.5rem'>
-              Search field cannot be empty
-            </Text>
-          )}
         </SimpleGrid>
       </Box>
     </Box>

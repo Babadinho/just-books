@@ -1,7 +1,31 @@
 import { Box, Flex, chakra, Text, Tooltip } from '@chakra-ui/react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { isAuthenticated } from '../actions/auth';
+import { addBook } from '../actions/book';
 
 const BookCard = ({ ...book }) => {
+  const { user, token } = isAuthenticated();
+
+  const handleAddBook = async () => {
+    let bookDetails: any = {
+      accessInfo: book.id,
+      volumeInfo: {
+        title: book.volumeInfo.title,
+        authors: book.volumeInfo.authors,
+        publisher: book.volumeInfo.publisher,
+        publishedDate: book.volumeInfo.publishedDate,
+        imageLinks: book.volumeInfo.imageLinks,
+      },
+    };
+
+    try {
+      const res = await addBook(bookDetails, token);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       {book.volumeInfo.imageLinks && (
@@ -35,27 +59,30 @@ const BookCard = ({ ...book }) => {
             }}
             position={'relative'}
           >
-            <Tooltip
-              hasArrow
-              label='Add to list'
-              placement='top-end'
-              bg='gray.200'
-              color='black'
-            >
-              <Text
-                fontSize={'1.2rem'}
-                color='orange.500'
-                position={'absolute'}
-                cursor='pointer'
-                top={2}
-                right={3}
-                _hover={{
-                  color: 'orange.600',
-                }}
+            {user && token && (
+              <Tooltip
+                hasArrow
+                label='Add to list'
+                placement='top-end'
+                bg='gray.200'
+                color='black'
               >
-                <i className='fa-regular fa-bookmark'></i>
-              </Text>
-            </Tooltip>
+                <Text
+                  fontSize={'1.2rem'}
+                  color='orange.500'
+                  position={'absolute'}
+                  cursor='pointer'
+                  top={2}
+                  right={3}
+                  _hover={{
+                    color: 'orange.600',
+                  }}
+                  onClick={handleAddBook}
+                >
+                  <i className='fa-regular fa-bookmark'></i>
+                </Text>
+              </Tooltip>
+            )}
             <Link to={`/book/${book.id}`}>
               <chakra.h1
                 fontSize='1xl'

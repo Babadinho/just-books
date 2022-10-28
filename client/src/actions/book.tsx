@@ -19,3 +19,12 @@ export const viewBook = async (bookId: any) =>
   await axios.get(
     `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.REACT_APP_API_KEY}`
   );
+
+export const addBook = async (book: any, token: any) =>
+  await axios.post(`${process.env.REACT_APP_URL}/book/add`, book, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });

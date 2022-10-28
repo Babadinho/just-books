@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const List = require('../models/List');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
@@ -34,11 +35,20 @@ exports.register = async (req, res) => {
         user.password = hash;
         user.save();
 
+        // create a default list for user
+        const list = new List({
+          name: 'Default',
+          user: user._id,
+        });
+
+        list.save();
+
         //Generate jwt signed token
         let token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: '7d',
         });
 
+        // send response to client
         res.json({
           token,
           user: {
@@ -62,8 +72,7 @@ exports.login = async (req, res) => {
 
   try {
     let user = await User.findOne({ username }).exec();
-    if (!user)
-      return res.status(400).send('User with that username does not exist');
+    if (!user) return res.status(400).send('Username does not exist');
 
     //match password
     bcrypt.compare(password, user.password, function (err, match) {

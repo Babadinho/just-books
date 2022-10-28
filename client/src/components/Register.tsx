@@ -36,7 +36,7 @@ const Register = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (password !== confirm_password) {
-      return message.error('Password does not match!', 4);
+      return message.error('Password does not match', 4);
     }
     try {
       const res = await register({
@@ -53,7 +53,7 @@ const Register = () => {
             username: res.data.username,
             password: '',
           });
-          message.success('Registration successfull!', 4);
+          message.success('Registration successful', 4);
           setUser(res.data);
           navigate('/');
         }, 2000);
