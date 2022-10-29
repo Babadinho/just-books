@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { isAuthenticated } from './actions/auth';
 import { getBooks } from './actions/book';
 import Books from './books/Books';
 import MyBooks from './books/MyBooks';
@@ -9,7 +10,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Register from './components/Register';
-import { BookContext, UserContext } from './context/Context';
+import { BookContext, UserContext, ListContext } from './context/Context';
 
 const App = () => {
   const location = useLocation();

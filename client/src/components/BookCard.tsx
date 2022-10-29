@@ -1,5 +1,5 @@
 import { Box, Flex, chakra, Text, Tooltip } from '@chakra-ui/react';
-import { useContext } from 'react';
+import { message } from 'antd';
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
 import { addBook } from '../actions/book';
@@ -20,9 +20,9 @@ const BookCard = ({ ...book }) => {
     };
 
     try {
-      const res = await addBook(bookDetails, token);
-    } catch (error) {
-      console.log(error);
+      const res = await addBook(user._id, bookDetails, token);
+    } catch (error: any) {
+      if (error.response.status === 400) message.error(error.response.data, 4);
     }
   };
 

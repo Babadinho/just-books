@@ -9,76 +9,17 @@ import {
   useColorModeValue,
   useDisclosure,
   SimpleGrid,
-  ChakraProps,
-  OmitCommonProps,
   HStack,
-  Button,
 } from '@chakra-ui/react';
-import { DetailedHTMLProps, HTMLAttributes, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import BookCard from '../components/BookCard';
+import Sidebar from '../components/Sidebar';
 import { BookContext } from '../context/Context';
 
 const MyBooks = () => {
-  const { books } = useContext(BookContext);
+  const [books, setBooks] = useState();
   const sidebar = useDisclosure();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('just-books');
-    window.location.reload();
-  };
-
-  const SidebarContent = (
-    props: JSX.IntrinsicAttributes &
-      OmitCommonProps<
-        DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-        keyof ChakraProps
-      > &
-      ChakraProps & { as?: 'div' | undefined }
-  ) => (
-    <Box
-      position={{ md: 'relative' }}
-      h={{ sm: '100vh', md: '80vh' }}
-      shadow={{ base: 'none', md: 'md' }}
-      bg='white'
-      _dark={{ bg: 'gray.800' }}
-      w='15rem'
-      {...props}
-    >
-      <Flex
-        direction='column'
-        as='nav'
-        fontSize='sm'
-        color='gray.600'
-        aria-label='Main Navigation'
-        px='4'
-        pl='6'
-        py='8'
-      >
-        <Box
-          onClick={() => {
-            sidebar.onClose();
-          }}
-          fontWeight='600'
-          fontSize={{ sm: '1rem', md: '0.87rem' }}
-        >
-          <i className='fa-solid fa-list'></i> &nbsp;My Lists
-        </Box>
-      </Flex>
-      <Box pl='6' px='4' py='4' w='full' position='absolute' bottom='0'>
-        <Button
-          w='full'
-          fontWeight='600'
-          fontSize='0.87rem'
-          onClick={handleLogout}
-          mt='5rem'
-        >
-          <i className='fa-solid fa-right-from-bracket'></i> &nbsp;Sign out
-        </Button>
-      </Box>
-    </Box>
-  );
 
   return (
     <Box as='section'>
@@ -89,7 +30,7 @@ const MyBooks = () => {
       >
         <DrawerOverlay display={{ sm: 'block', md: 'none' }} />
         <DrawerContent display={{ sm: 'block', md: 'none' }}>
-          <SidebarContent w='17rem' borderRight='none' />
+          <Sidebar w='17rem' borderRight='none' />
         </DrawerContent>
       </Drawer>
       <Box transition='.3s ease'>
@@ -153,7 +94,7 @@ const MyBooks = () => {
           display='flex'
           justifyContent='center'
         >
-          <SidebarContent display={{ base: 'none', md: 'block' }} />
+          <Sidebar display={{ base: 'none', md: 'block' }} />
           <Box
             as='main'
             w={{
@@ -167,11 +108,11 @@ const MyBooks = () => {
               spacing='2rem'
               pl={{ sm: '0', md: '2rem' }}
             >
-              {books &&
+              {/* {books &&
                 books.length > 0 &&
                 books.map((book: any, i: any) => {
                   return <BookCard {...book} key={i} />;
-                })}
+                })} */}
             </SimpleGrid>
           </Box>
         </Box>

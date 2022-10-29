@@ -13,3 +13,10 @@ interface bookInterface {
 }
 
 export const BookContext = createContext<Partial<bookInterface>>({});
+
+interface listInterface {
+  list: any;
+  setList: any;
+}
+
+export const ListContext = createContext<Partial<listInterface>>({});

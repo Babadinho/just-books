@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 
 //controllers
-const { addBook } = require('../controllers/book');
+const { getList, addList } = require('../controllers/list');
 const { requireSignin } = require('../controllers/auth');
 
 //routes
-router.post('/add-book/:userId', requireSignin, addBook);
+router.get('/list/:userId', requireSignin, getList);
+router.post('/add-list/:userId', requireSignin, addList);
 
 module.exports = router;
