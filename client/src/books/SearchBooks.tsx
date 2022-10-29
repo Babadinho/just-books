@@ -20,6 +20,7 @@ import {
 } from '@chakra-ui/react';
 import BookCard from '../components/BookCard';
 import { Search2Icon } from '@chakra-ui/icons';
+import { message } from 'antd';
 
 const SearchBooks = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const SearchBooks = () => {
   const { q, orderBy, filterBy } = queryString.parse(window.location.search);
 
   const loadSearch = async () => {
+    setSearch([]);
     try {
       let res = await searchBook(q, orderBy, filterBy, start);
       setSearch(res.data.items);
@@ -49,6 +51,7 @@ const SearchBooks = () => {
     if (value === '') {
       e.preventDefault();
       setIsError(true);
+      message.error('Search field cannot be empty', 4);
       return;
     }
     setStart(0);
@@ -62,7 +65,7 @@ const SearchBooks = () => {
   };
 
   useEffect(() => {
-    loadSearch();
+    q !== undefined && loadSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q, order, filter, start, max]);
 
@@ -158,11 +161,6 @@ const SearchBooks = () => {
                 }
               />
             </InputGroup>
-            {isError && (
-              <Text align='left' fontSize='0.8rem' color='red' pt='0.5rem'>
-                Search field cannot be empty
-              </Text>
-            )}
           </SimpleGrid>
         </Box>
       </Box>
@@ -198,56 +196,60 @@ const SearchBooks = () => {
           )}
         </chakra.h1>
         <Flex justifyContent='space-between' alignItems='center' mb='1.3rem'>
-          <Box w={{ base: '40%', md: '12rem' }}>
-            <Select
-              placeholder='Filter'
-              size='sm'
-              borderColor='orange.400'
-              focusBorderColor='orange.400'
-              _hover={{
-                borderColor: 'orange.400',
-              }}
-              value={filter}
-              onChange={(e) => {
-                setFilter(e.target.value);
-                setStart(0);
-                setMax(21);
-                navigate(
-                  `/search/?q=${value}&orderBy=${order}&filterBy=${e.target.value}&startIndex=0&maxResults=21`
-                );
-              }}
-            >
-              <option value='partial'>Partial Preview</option>
-              <option value='full'>Full Preview</option>
-              <option value='free-ebooks'>Free eBooks</option>
-              <option value='paid-ebooks'>Paid eBooks</option>
-              <option value='ebooks '>Google eBooks</option>
-            </Select>
-          </Box>
+          {q !== undefined && search && search.length > 0 && (
+            <>
+              <Box w={{ base: '40%', md: '12rem' }}>
+                <Select
+                  placeholder='Filter'
+                  size='sm'
+                  borderColor='orange.400'
+                  focusBorderColor='orange.400'
+                  _hover={{
+                    borderColor: 'orange.400',
+                  }}
+                  value={filter}
+                  onChange={(e) => {
+                    setFilter(e.target.value);
+                    setStart(0);
+                    setMax(21);
+                    navigate(
+                      `/search/?q=${value}&orderBy=${order}&filterBy=${e.target.value}&startIndex=0&maxResults=21`
+                    );
+                  }}
+                >
+                  <option value='partial'>Partial Preview</option>
+                  <option value='full'>Full Preview</option>
+                  <option value='free-ebooks'>Free eBooks</option>
+                  <option value='paid-ebooks'>Paid eBooks</option>
+                  <option value='ebooks '>Google eBooks</option>
+                </Select>
+              </Box>
 
-          <RadioGroup
-            onChange={(order) => {
-              setOrder(order);
-              setStart(0);
-              setMax(21);
-              navigate(
-                `/search/?q=${value}&orderBy=${order}&filterBy=${filter}&startIndex=0&maxResults=21`
-              );
-            }}
-            value={order}
-            defaultValue={order}
-          >
-            <Stack spacing={3} direction='row'>
-              <Radio size='sm' colorScheme='orange' value='relevance'>
-                Relevance
-              </Radio>
-              <Radio size='sm' colorScheme='orange' value='newest'>
-                Newest
-              </Radio>
-            </Stack>
-          </RadioGroup>
+              <RadioGroup
+                onChange={(order) => {
+                  setOrder(order);
+                  setStart(0);
+                  setMax(21);
+                  navigate(
+                    `/search/?q=${value}&orderBy=${order}&filterBy=${filter}&startIndex=0&maxResults=21`
+                  );
+                }}
+                value={order}
+                defaultValue={order}
+              >
+                <Stack spacing={3} direction='row'>
+                  <Radio size='sm' colorScheme='orange' value='relevance'>
+                    Relevance
+                  </Radio>
+                  <Radio size='sm' colorScheme='orange' value='newest'>
+                    Newest
+                  </Radio>
+                </Stack>
+              </RadioGroup>
+            </>
+          )}
         </Flex>
-        {search && search.length === 0 && (
+        {q !== undefined && search && search.length === 0 && (
           <Flex
             flexDir='column'
             textAlign='center'
@@ -296,7 +298,7 @@ const SearchBooks = () => {
               )}
             </Box>
             <Box>
-              {search !== undefined && (
+              {search !== undefined && search.length !== 0 && (
                 <Button
                   alignSelf='flex-end'
                   size='sm'

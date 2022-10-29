@@ -22,7 +22,7 @@ const Footer = () => {
         borderColor={useColorModeValue('gray.200', 'gray.900')}
         h={'60px'}
         px={{ base: 4, md: 20, xl: 40 }}
-        mt='6rem'
+        mt='5rem'
       >
         <Flex
           w='full'
@@ -30,7 +30,6 @@ const Footer = () => {
           flexDir={{ base: 'column', md: 'row' }}
           align='center'
           justify='space-between'
-          //   px='4'
           py='4'
         >
           <chakra.p

@@ -71,3 +71,7 @@ code {
 .book-card {
   transition: transform 0.5s;
 }
+
+.chakra-slide {
+width: 17rem !important;
+}

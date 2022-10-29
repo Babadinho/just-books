@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { getBooks } from './actions/book';
 import Books from './books/Books';
+import MyBooks from './books/MyBooks';
 import SearchBooks from './books/SearchBooks';
 import ViewBook from './books/ViewBook';
 import Footer from './components/Footer';
@@ -11,6 +12,7 @@ import Register from './components/Register';
 import { BookContext, UserContext } from './context/Context';
 
 const App = () => {
+  const location = useLocation();
   const [user, setUser] = useState<any | null>(null);
   const [books, setBooks] = useState<any | null>(null);
   let value: any;
@@ -35,21 +37,22 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <UserContext.Provider value={value}>
         <BookContext.Provider value={book}>
-          <NavBar />
+          {location.pathname !== '/my-books' && <NavBar />}
           <Routes>
             <Route path='/' element={<Books />} />
             <Route path='/search' element={<SearchBooks />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/my-books' element={<MyBooks />} />
             <Route path='/book/:bookId' element={<ViewBook />} />
           </Routes>
           <Footer />
         </BookContext.Provider>
       </UserContext.Provider>
-    </BrowserRouter>
+    </>
   );
 };
 
