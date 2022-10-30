@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
 
         // create a default list for user
         const list = new List({
-          name: 'Default',
+          name: 'default',
           user: user._id,
         });
 

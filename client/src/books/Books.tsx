@@ -1,54 +1,15 @@
 import { Box, chakra, Text, SimpleGrid, Flex } from '@chakra-ui/react';
-import { useState, useEffect, useContext } from 'react';
-import { searchBook, getBooks } from '../actions/book';
+import { useContext } from 'react';
 import BookCard from '../components/BookCard';
 import Header from '../components/Header';
 import { BookContext } from '../context/Context';
 
 const Books = () => {
   const { books } = useContext(BookContext);
-  // const [books, setBooks] = useState<any | null>(null);
-  // const [loading, setLoading] = useState()
-  // const [search, setSearch] = useState<any | null>([]);
-  // const [bookCount, setBookCount] = useState<number>();
-  // const [value, setValue] = useState<string>('');
-  // const [searchString, setSearchString] = useState<string>('');
-
-  // const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   setSearchString(value);
-  //   try {
-  //     let res = await searchBook(value);
-  //     setBooks('');
-  //     setValue('');
-  //     setSearch(res.data.items);
-  //     setBookCount(res.data.totalItems);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const loadBooks = async () => {
-  //   try {
-  //     let res = await getBooks();
-  //     setBooks(res.data.items);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   loadBooks();
-  // }, []);
 
   return (
     <>
-      <Header
-      // value={value}
-      // search={search}
-      // setValue={setValue}
-      // handleSearch={handleSearch}
-      />
+      <Header />
       <Box
         as='main'
         px={{ base: '1rem', md: '0' }}
@@ -73,11 +34,6 @@ const Books = () => {
           lineHeight='shorter'
           textAlign={'center'}
         >
-          {/* {!books && search && search.length > 0 && (
-            <Text>
-              {bookCount} Search results for '{searchString}'
-            </Text>
-          )} */}
           {books && (
             <Text>
               <i className='fa-solid fa-star'></i> Trending books

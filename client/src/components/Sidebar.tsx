@@ -27,7 +27,6 @@ import {
 } from 'react';
 import { isAuthenticated } from '../actions/auth';
 import { addList, getList } from '../actions/list';
-import { ListContext } from '../context/Context';
 
 const Sidebar = (
   props: JSX.IntrinsicAttributes &
@@ -206,6 +205,7 @@ const Sidebar = (
                   fontSize={{ base: '0.9rem', md: '0.95rem' }}
                   py='0.1rem'
                   onClick={() => setActiveNav(l.name)}
+                  textTransform='capitalize'
                 >
                   <i className='fa-solid fa-caret-right'></i>&nbsp;{l.name}
                 </Text>

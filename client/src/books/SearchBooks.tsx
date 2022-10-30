@@ -196,7 +196,7 @@ const SearchBooks = () => {
           )}
         </chakra.h1>
         <Flex justifyContent='space-between' alignItems='center' mb='1.3rem'>
-          {q !== undefined && search && search.length > 0 && (
+          {q !== undefined && (
             <>
               <Box w={{ base: '40%', md: '12rem' }}>
                 <Select

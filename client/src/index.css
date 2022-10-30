@@ -49,7 +49,7 @@ code {
 }
 
 .fa-solid {
-  color: #dd6b20;;
+  color: #dd6b20;
 }
 
 .logo-book {
@@ -64,14 +64,29 @@ code {
   outline: none;
 }
 
-.book-card:hover {
+/* .book-card:hover {
   transform: scale(1.05);
 }
 
 .book-card {
   transition: transform 0.5s;
-}
+} */
 
 .chakra-slide {
 width: 17rem !important;
+}
+
+.ant-btn-primary {
+  background: #dd6b20 !important;
+  border-color: #dd6b20 !important;
+}
+
+.ant-btn-primary:hover {
+  background: #c05621 !important;
+  border-color: #c05621 !important;
+}
+
+.ant-btn-default:hover {
+  color: #dd6b20 !important;
+  border-color: #dd6b20 !important;
 }

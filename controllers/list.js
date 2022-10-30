@@ -7,7 +7,7 @@ exports.getList = async (req, res) => {
       res.json(list);
     }
   } catch (error) {
-    es.status(400).send('Error Loading list');
+    res.status(400).send('Error Loading list');
   }
 };
 
@@ -20,13 +20,13 @@ exports.addList = async (req, res) => {
 
     //check if list with same name exists
     let listExist = await List.findOne({
-      name: name[0].toUpperCase() + name.substring(1),
+      name: name[0].toLowerCase() + name.substring(1),
       user: req.params.userId,
     }).exec();
     if (listExist) return res.status(400).send('List already exists');
 
     const newList = new List({
-      name: name[0].toUpperCase() + name.substring(1),
+      name: name[0].toLowerCase() + name.substring(1),
       user: req.params.userId,
     });
 
