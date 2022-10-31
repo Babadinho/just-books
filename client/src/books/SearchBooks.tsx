@@ -48,6 +48,7 @@ const SearchBooks = () => {
   };
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     if (value === '') {
       e.preventDefault();
       setIsError(true);

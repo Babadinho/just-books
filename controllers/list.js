@@ -30,9 +30,12 @@ exports.addList = async (req, res) => {
       user: req.params.userId,
     });
 
-    newList.save();
+    await newList.save();
 
-    return res.json(newList);
+    const list = await List.find({ user: req.params.userId });
+    if (list) {
+      res.json(list);
+    }
   } catch (err) {
     return res.status(400).send('Error. Try again');
   }

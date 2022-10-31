@@ -19,6 +19,7 @@ const Header = ({ ...props }) => {
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
     if (value === '') {
       e.preventDefault();
       setIsError(true);
@@ -83,7 +84,8 @@ const Header = ({ ...props }) => {
           select search criteria.
         </chakra.p>
         <SimpleGrid
-          // as='form'
+          onSubmit={handleSubmit}
+          as='form'
           w={{
             base: 'full',
             md: 7 / 12,
@@ -92,7 +94,6 @@ const Header = ({ ...props }) => {
           pt={8}
           mx='auto'
           mb={8}
-          // onSubmit={handleSubmit}
         >
           <InputGroup size='lg'>
             <Input
@@ -103,7 +104,6 @@ const Header = ({ ...props }) => {
               background='white'
               fontSize='md'
               value={value}
-              isRequired
               onChange={(e) => {
                 setValue(e.target.value);
                 setIsError(false);
@@ -111,7 +111,6 @@ const Header = ({ ...props }) => {
               _hover={{
                 focusBorderColor: 'white',
               }}
-              // onSubmit={handleSubmit}
             />
             <InputRightElement
               children={

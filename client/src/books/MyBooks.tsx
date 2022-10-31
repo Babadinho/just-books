@@ -20,11 +20,10 @@ import { ListContext, MyBooksContext } from '../context/Context';
 import { Button, Empty } from 'antd';
 
 const MyBooks = () => {
-  const [activeNavName, setActiveNavName] = useState<any | null>();
   const [activeNavId, setActiveNavId] = useState<any | null>();
   const sidebar = useDisclosure();
   const { myBooks } = useContext(MyBooksContext);
-  const { list } = useContext(ListContext);
+  const { list, setList } = useContext(ListContext);
 
   // check books in list count
   const books =
@@ -32,7 +31,6 @@ const MyBooks = () => {
     myBooks.filter((book: any) => book.list === activeNavId && activeNavId);
 
   useEffect(() => {
-    setActiveNavName(list && list[0].name);
     setActiveNavId(list && list[0]._id);
   }, [list]);
 
@@ -49,6 +47,7 @@ const MyBooks = () => {
             activeNav={activeNavId}
             setActiveNav={setActiveNavId}
             list={list}
+            setList={setList}
             sidebar={sidebar}
             w='17rem'
             borderRight='none'
@@ -121,6 +120,7 @@ const MyBooks = () => {
               activeNav={activeNavId}
               setActiveNav={setActiveNavId}
               list={list}
+              setList={setList}
               sidebar={sidebar}
             />
           </Box>

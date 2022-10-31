@@ -14,7 +14,7 @@ import { addList } from '../actions/list';
 import AddListModal from './AddListModal';
 
 const Sidebar = (
-  { list, activeNav, setActiveNav, sidebar }: any,
+  { list, activeNav, setActiveNav, sidebar, setList }: any,
   props: JSX.IntrinsicAttributes &
     OmitCommonProps<
       DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
@@ -25,7 +25,7 @@ const Sidebar = (
   const { user, token } = isAuthenticated();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState();
   const [value, setValue] = useState<any | null>();
 
   const handleSubmit = async () => {
@@ -37,6 +37,7 @@ const Sidebar = (
           setLoading(false);
           onClose();
           setValue('');
+          setList(res.data);
           message.success(res.data.name + ' added to your list', 4);
         }, 2000);
       }
@@ -72,9 +73,6 @@ const Sidebar = (
           py='6'
         >
           <Flex
-            // onClick={() => {
-            //   sidebar.onClose();
-            // }}
             fontWeight='600'
             fontSize={{ base: '1rem', md: '1rem' }}
             justifyContent='space-between'
