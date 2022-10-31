@@ -10,16 +10,31 @@ import {
   useDisclosure,
   SimpleGrid,
   HStack,
+  chakra,
 } from '@chakra-ui/react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import BookCard from '../components/BookCard';
 import Sidebar from '../components/Sidebar';
-import { BookContext } from '../context/Context';
+import { ListContext, MyBooksContext } from '../context/Context';
+import { Button, Empty } from 'antd';
 
 const MyBooks = () => {
-  const [books, setBooks] = useState();
+  const [activeNavName, setActiveNavName] = useState<any | null>();
+  const [activeNavId, setActiveNavId] = useState<any | null>();
   const sidebar = useDisclosure();
+  const { myBooks } = useContext(MyBooksContext);
+  const { list } = useContext(ListContext);
+
+  // check books in list count
+  const books =
+    myBooks &&
+    myBooks.filter((book: any) => book.list === activeNavId && activeNavId);
+
+  useEffect(() => {
+    setActiveNavName(list && list[0].name);
+    setActiveNavId(list && list[0]._id);
+  }, [list]);
 
   return (
     <Box as='section'>
@@ -30,7 +45,14 @@ const MyBooks = () => {
       >
         <DrawerOverlay display={{ sm: 'block', md: 'none' }} />
         <DrawerContent display={{ sm: 'block', md: 'none' }}>
-          <Sidebar w='17rem' borderRight='none' />
+          <Sidebar
+            activeNav={activeNavId}
+            setActiveNav={setActiveNavId}
+            list={list}
+            sidebar={sidebar}
+            w='17rem'
+            borderRight='none'
+          />
         </DrawerContent>
       </Drawer>
       <Box transition='.3s ease'>
@@ -89,12 +111,19 @@ const MyBooks = () => {
           </HStack>
         </Flex>
         <Box
-          py={{ base: 2 }}
+          py={{ base: 5 }}
           px={{ base: 4, md: '5rem', xl: '8rem' }}
           display='flex'
           justifyContent='center'
         >
-          <Sidebar display={{ base: 'none', md: 'block' }} />
+          <Box display={{ base: 'none', md: 'block' }} w='16rem'>
+            <Sidebar
+              activeNav={activeNavId}
+              setActiveNav={setActiveNavId}
+              list={list}
+              sidebar={sidebar}
+            />
+          </Box>
           <Box
             as='main'
             w={{
@@ -108,12 +137,28 @@ const MyBooks = () => {
               spacing='2rem'
               pl={{ sm: '0', md: '2rem' }}
             >
-              {/* {books &&
-                books.length > 0 &&
-                books.map((book: any, i: any) => {
-                  return <BookCard {...book} key={i} />;
-                })} */}
+              {myBooks &&
+                myBooks.length > 0 &&
+                myBooks.map((book: any, i: any) => {
+                  if (book.list === activeNavId && activeNavId) {
+                    return <BookCard {...book} key={i} />;
+                  }
+                })}
             </SimpleGrid>
+            {books.length === 0 && (
+              <Box pt='5rem'>
+                <Empty
+                  image={Empty.PRESENTED_IMAGE_SIMPLE}
+                  description={<Box as='span'>No books in this list</Box>}
+                >
+                  <Button type='primary'>
+                    <Link className='nav_link' to='/search'>
+                      Search for books
+                    </Link>
+                  </Button>
+                </Empty>
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

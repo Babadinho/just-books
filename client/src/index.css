@@ -64,13 +64,13 @@ code {
   outline: none;
 }
 
-/* .book-card:hover {
+.book-card:hover {
   transform: scale(1.05);
 }
 
 .book-card {
   transition: transform 0.5s;
-} */
+}
 
 .chakra-slide {
 width: 17rem !important;

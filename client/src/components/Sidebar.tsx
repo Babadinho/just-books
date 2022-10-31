@@ -6,29 +6,15 @@ import {
   Button,
   Text,
   useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Stack,
-  FormControl,
-  Input,
 } from '@chakra-ui/react';
 import { message } from 'antd';
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
 import { isAuthenticated } from '../actions/auth';
-import { addList, getList } from '../actions/list';
+import { addList } from '../actions/list';
+import AddListModal from './AddListModal';
 
 const Sidebar = (
+  { list, activeNav, setActiveNav, sidebar }: any,
   props: JSX.IntrinsicAttributes &
     OmitCommonProps<
       DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
@@ -36,24 +22,11 @@ const Sidebar = (
     > &
     ChakraProps & { as?: 'div' | undefined }
 ) => {
-  const [list, setList] = useState<any | null>();
-  const [newList, setNewList] = useState<any | null>();
   const { user, token } = isAuthenticated();
-  const sidebar = useDisclosure();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [activeNav, setActiveNav] = useState<any | null>('Default');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [value, setValue] = useState<any | null>();
-
-  const loadList = async () => {
-    try {
-      const res = await getList(user._id, token);
-      setList(res.data);
-    } catch (error: any) {
-      message.error(error.response.data, 4);
-    }
-  };
 
   const handleSubmit = async () => {
     try {
@@ -61,7 +34,6 @@ const Sidebar = (
       if (res.data) {
         setLoading(true);
         setTimeout(() => {
-          setNewList(res.data);
           setLoading(false);
           onClose();
           setValue('');
@@ -74,89 +46,10 @@ const Sidebar = (
     }
   };
 
-  useEffect(() => {
-    loadList();
-  }, [newList]);
-
   const handleLogout = () => {
     window.localStorage.removeItem('just-books');
     window.location.reload();
   };
-
-  const CreatelistModal = (
-    <>
-      <Modal
-        isOpen={isOpen}
-        onClose={() => {
-          onClose();
-          setValue('');
-        }}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader fontSize='1.2rem' color='gray.700'>
-            Create new List
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack spacing={4} color='gray.600'>
-              <FormControl>
-                <Input
-                  borderColor={error ? 'red' : '#e2e8f0'}
-                  _focus={{
-                    outline: 'none',
-                  }}
-                  placeholder='Enter list name'
-                  value={value}
-                  onChange={(e) => {
-                    setValue(e.target.value);
-                    setError('');
-                  }}
-                />
-                <Text color='red.500' pt='0.3rem'>
-                  {error && error}
-                </Text>
-              </FormControl>
-            </Stack>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button
-              loadingText='Submitting'
-              size='md'
-              mr='0.7rem'
-              fontWeight='500'
-              bg={'orange.500'}
-              color={'white'}
-              _hover={{
-                bg: 'orange.600',
-              }}
-              onClick={handleSubmit}
-            >
-              {loading ? (
-                <Box className='spinner-border text-light' role='status'>
-                  <Box as='span' className='sr-only'>
-                    Loading...
-                  </Box>
-                </Box>
-              ) : (
-                'Submit'
-              )}
-            </Button>
-            <Button
-              variant='ghost'
-              onClick={() => {
-                onClose();
-                setValue('');
-              }}
-            >
-              Cancel
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
 
   return (
     <>
@@ -166,7 +59,6 @@ const Sidebar = (
         shadow={{ base: 'none', md: 'md' }}
         bg='white'
         _dark={{ bg: 'gray.800' }}
-        w='15rem'
         {...props}
       >
         <Flex
@@ -180,9 +72,9 @@ const Sidebar = (
           py='6'
         >
           <Flex
-            onClick={() => {
-              sidebar.onClose();
-            }}
+            // onClick={() => {
+            //   sidebar.onClose();
+            // }}
             fontWeight='600'
             fontSize={{ base: '1rem', md: '1rem' }}
             justifyContent='space-between'
@@ -198,16 +90,25 @@ const Sidebar = (
           <Flex pl='3' py='2' flexDir='column'>
             {list &&
               list.length > 0 &&
-              list.map((l: { name: any }, i: any) => (
+              list.map((l: any, i: any) => (
                 <Text
+                  key={i}
                   cursor='pointer'
-                  color={activeNav === l.name ? 'orange.500' : ''}
+                  color={activeNav === l._id ? 'orange.500' : ''}
                   fontSize={{ base: '0.9rem', md: '0.95rem' }}
-                  py='0.1rem'
-                  onClick={() => setActiveNav(l.name)}
+                  py='0.2rem'
+                  onClick={() => {
+                    setActiveNav(l._id);
+                    sidebar.onClose();
+                  }}
                   textTransform='capitalize'
+                  display='flex'
+                  alignItems='center'
                 >
-                  <i className='fa-solid fa-caret-right'></i>&nbsp;{l.name}
+                  <Text as='span' fontSize='0.6rem'>
+                    <i className='fa-solid fa-bookmark'></i>
+                  </Text>
+                  &nbsp;{l.name}
                 </Text>
               ))}
           </Flex>
@@ -223,7 +124,16 @@ const Sidebar = (
             <i className='fa-solid fa-right-from-bracket'></i> &nbsp;Sign out
           </Button>
         </Box>
-        {CreatelistModal}
+        <AddListModal
+          value={value}
+          setValue={setValue}
+          loading={loading}
+          handleSubmit={handleSubmit}
+          isOpen={isOpen}
+          onClose={onClose}
+          error={error}
+          setError={setError}
+        />
       </Box>
     </>
   );

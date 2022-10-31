@@ -21,7 +21,7 @@ const Books = () => {
         mx='auto'
       >
         <chakra.h1
-          mb={'3rem'}
+          mb={'3.5rem'}
           fontSize={{
             base: '2xl',
             md: '2xl',
