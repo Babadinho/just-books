@@ -24,6 +24,23 @@ export const getMyBooks = async (userId: any, token: any) =>
     },
   });
 
+export const getActiveListBooks = async (
+  userId: any,
+  listId: any,
+  token: any
+) =>
+  await axios.post(
+    `${process.env.REACT_APP_URL}/active-list-books/${userId}`,
+    listId,
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
 export const viewBook = async (bookId: any) =>
   await axios.get(
     `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${process.env.REACT_APP_API_KEY}`

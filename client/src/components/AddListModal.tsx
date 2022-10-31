@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -11,7 +11,6 @@ import {
   FormControl,
   Input,
   Text,
-  useDisclosure,
   Button,
   Box,
 } from '@chakra-ui/react';
@@ -26,6 +25,8 @@ const AddListModal = ({
   error,
   setError,
 }: any) => {
+  const initialRef = useRef(null);
+
   return (
     <>
       <Modal
@@ -34,6 +35,7 @@ const AddListModal = ({
           onClose();
           setValue('');
         }}
+        initialFocusRef={initialRef}
       >
         <ModalOverlay />
         <ModalContent>
@@ -45,6 +47,7 @@ const AddListModal = ({
             <Stack spacing={4} color='gray.600'>
               <FormControl>
                 <Input
+                  ref={initialRef}
                   borderColor={error ? 'red' : '#e2e8f0'}
                   _focus={{
                     outline: 'none',
