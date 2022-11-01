@@ -142,7 +142,6 @@ const SearchBooks = () => {
                 _hover={{
                   focusBorderColor: 'white',
                 }}
-                // onSubmit={handleSubmit}
               />
               <InputRightElement
                 children={

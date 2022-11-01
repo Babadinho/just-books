@@ -8,9 +8,10 @@ import MyBooks from './books/MyBooks';
 import SearchBooks from './books/SearchBooks';
 import ViewBook from './books/ViewBook';
 import Footer from './components/Footer';
-import Login from './components/Login';
+import Login from './auth/Login';
 import NavBar from './components/NavBar';
-import Register from './components/Register';
+import Register from './auth/Register';
+import PrivateRoute from './auth/PrivateRoute';
 import {
   BookContext,
   UserContext,
@@ -18,6 +19,7 @@ import {
   MyBooksContext,
 } from './context/Context';
 import { message } from 'antd';
+import Settings from './components/Settings';
 
 const App = () => {
   const location = useLocation();
@@ -37,7 +39,7 @@ const App = () => {
   const loadBooks = async () => {
     try {
       let res = await getBooks();
-      setBooks(res.data.items);
+      setBooks(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +76,7 @@ const App = () => {
     loadBooks();
     loadList();
     loadMyBooks();
-  }, [setMyBooks]);
+  }, [user, setMyBooks]);
 
   return (
     <>
@@ -88,7 +90,22 @@ const App = () => {
                 <Route path='/search' element={<SearchBooks />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path='/my-books' element={<MyBooks />} />
+                <Route
+                  path='/my-books'
+                  element={
+                    <PrivateRoute>
+                      <MyBooks />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path='/settings'
+                  element={
+                    <PrivateRoute>
+                      <Settings />
+                    </PrivateRoute>
+                  }
+                />
                 <Route path='/book/:bookId' element={<ViewBook />} />
               </Routes>
               <Footer />

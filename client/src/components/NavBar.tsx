@@ -12,7 +12,7 @@ const NavBar = () => {
   const loadBooks = async () => {
     try {
       let res = await getBooks();
-      setBooks(res.data.items);
+      setBooks(res.data);
     } catch (error) {
       console.log(error);
     }

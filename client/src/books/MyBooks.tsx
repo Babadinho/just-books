@@ -16,7 +16,7 @@ import { useState, useContext, useEffect, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import BookCard from '../components/BookCard';
 import Sidebar from '../components/Sidebar';
-import { ListContext } from '../context/Context';
+import { ListContext, MyBooksContext } from '../context/Context';
 import { Empty } from 'antd';
 import Pagination from '@choc-ui/paginator';
 import { isAuthenticated } from '../actions/auth';
@@ -27,26 +27,34 @@ const MyBooks = () => {
   const { list, setList } = useContext(ListContext);
   const [activeNavId, setActiveNavId] = useState<any | null>();
   const sidebar = useDisclosure();
-  const [myBooks, setMyBooks] = useState<any | null>();
+  const { myBooks } = useContext(MyBooksContext);
+  const [activeListBooks, setActiveListBooks] = useState<any | null>('');
   const [current, setCurrent] = useState(1);
-  const pageSize = 6;
+  const pageSize = 8;
   const offset = (current - 1) * pageSize;
-  const books_data = myBooks && myBooks.slice(offset, offset + pageSize);
+  const books_data =
+    activeListBooks && activeListBooks.slice(offset, offset + pageSize);
 
   // check books in list count
   const books =
-    myBooks &&
-    myBooks.filter((book: any) => book.list === activeNavId && activeNavId);
+    activeListBooks &&
+    activeListBooks.filter(
+      (book: any) => book.list === activeNavId && activeNavId
+    );
 
   const loadActiveListBooks = async () => {
     try {
       const res = await getActiveListBooks(
         user._id,
-        { listId: activeNavId },
+        {
+          listId: activeNavId
+            ? activeNavId
+            : list && list.length > 0 && list[0]._id,
+        },
         token
       );
       if (res.data) {
-        setMyBooks(res.data);
+        setActiveListBooks(res.data);
         setCurrent(1);
       }
     } catch (error) {
@@ -75,12 +83,12 @@ const MyBooks = () => {
   };
 
   useEffect(() => {
-    setActiveNavId(list && list[0]._id);
-  }, []);
+    loadActiveListBooks();
+  }, [list, myBooks, activeNavId]);
 
   useEffect(() => {
-    loadActiveListBooks();
-  }, [list, activeNavId]);
+    setActiveNavId(list && list.length > 0 && list[0]._id);
+  }, [myBooks]);
 
   return (
     <Box as='section'>
@@ -193,7 +201,7 @@ const MyBooks = () => {
                   }
                 })}
             </SimpleGrid>
-            {myBooks && myBooks.length > pageSize && (
+            {activeListBooks && activeListBooks.length > pageSize && (
               <Box pl={{ sm: '0', md: '2rem' }} mt='2rem'>
                 <Pagination
                   current={current}
@@ -201,7 +209,7 @@ const MyBooks = () => {
                     setCurrent(page);
                   }}
                   pageSize={pageSize}
-                  total={myBooks && myBooks.length}
+                  total={activeListBooks && activeListBooks.length}
                   itemRender={itemRender}
                   paginationProps={{
                     mt: '1rem',
@@ -217,11 +225,11 @@ const MyBooks = () => {
                   image={Empty.PRESENTED_IMAGE_SIMPLE}
                   description={<Box as='span'>No books in this list</Box>}
                 >
-                  <Button>
-                    <Link className='nav_link' to='/search'>
-                      Search for books
-                    </Link>
-                  </Button>
+                  <Link to='/search'>
+                    <Button colorScheme='orange' size='sm' fontWeight='sm'>
+                      Search books
+                    </Button>
+                  </Link>
                 </Empty>
               </Box>
             )}

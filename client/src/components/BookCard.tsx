@@ -78,7 +78,7 @@ const BookCard = ({ ...book }) => {
   };
 
   useEffect(() => {
-    setSelectOption(list[0]._id);
+    setSelectOption(list && list[0]._id);
   }, [myBooks]);
 
   return (
@@ -280,7 +280,7 @@ const BookCard = ({ ...book }) => {
           <PopoverBody>
             <Select
               showSearch
-              defaultValue={list[0]._id}
+              defaultValue={list && list[0]._id}
               style={{ width: '100%', textTransform: 'capitalize' }}
               placeholder='Select list'
               optionFilterProp='children'

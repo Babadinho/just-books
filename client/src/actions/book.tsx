@@ -11,9 +11,12 @@ export const searchBook = async (
   );
 
 export const getBooks = async () =>
-  await axios.get(
-    `https://www.googleapis.com/books/v1/volumes?q=''&projection=full&startIndex=0&maxResults=33&key=${process.env.REACT_APP_API_KEY}`
-  );
+  await axios.get(`${process.env.REACT_APP_URL}/books`);
+
+// export const getBooks = async () =>
+//   await axios.get(
+//     `https://www.googleapis.com/books/v1/volumes?q=''&projection=full&startIndex=0&maxResults=33&key=${process.env.REACT_APP_API_KEY}`
+//   );
 
 export const getMyBooks = async (userId: any, token: any) =>
   await axios.get(`${process.env.REACT_APP_URL}/books/${userId}`, {
