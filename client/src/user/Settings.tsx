@@ -70,7 +70,7 @@ const Settings = () => {
 
   return (
     <>
-      <Flex minH={'80vh'} align={'center'} justify={'center'}>
+      <Flex align={'center'} justify={'center'}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} w={'60vh'}>
           <Stack align={'center'}>
             <Heading fontSize={'3xl'} color={'orange.500'} textAlign='center'>

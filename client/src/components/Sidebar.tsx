@@ -234,7 +234,7 @@ const Sidebar = (
             fontWeight='500'
             fontSize='1.5rem'
             display='flex'
-            justifyContent='flex-end'
+            justifyContent='space-between'
             alignItems='center'
           >
             <Tooltip
