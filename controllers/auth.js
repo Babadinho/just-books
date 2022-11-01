@@ -71,7 +71,7 @@ exports.login = async (req, res) => {
     return res.status(400).send('All fields are required');
 
   try {
-    let user = await User.findOne({ username }).exec();
+    let user = await User.findOne({ username }).select('+password').exec();
     if (!user) return res.status(400).send('Username does not exist');
 
     //match password

@@ -30,10 +30,10 @@ const Sidebar = (
   const { user, token } = isAuthenticated();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
-  const [value, setValue] = useState<any | null>();
-  const [edit, setEdit] = useState<any | null>();
-  const [editValue, setEditValue] = useState<any | null>();
+  const [error, setError] = useState('');
+  const [value, setValue] = useState<any | null>('');
+  const [edit, setEdit] = useState<any | null>('');
+  const [editValue, setEditValue] = useState<any | null>('');
 
   //get default list and store in variable
   const defaultActive = list && list.length > 0 && list[0]._id;
@@ -139,7 +139,7 @@ const Sidebar = (
                 <Box
                   key={i}
                   color={activeNav === l._id ? 'orange.500' : ''}
-                  fontSize={{ base: '0.9rem', md: '0.95rem' }}
+                  fontSize={{ base: '0.9rem', md: '0.92rem' }}
                   py='0.2rem'
                   textTransform='capitalize'
                 >

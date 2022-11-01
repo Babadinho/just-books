@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { isAuthenticated } from './actions/auth';
-import { getBooks, getMyBooks } from './actions/book';
+import { getBooks, getUserBooks } from './actions/book';
 import { getList } from './actions/list';
 import Books from './books/Books';
 import MyBooks from './books/MyBooks';
@@ -20,6 +20,7 @@ import {
 } from './context/Context';
 import { message } from 'antd';
 import Settings from './user/Settings';
+import UserBooks from './user/UserBooks';
 
 const App = () => {
   const location = useLocation();
@@ -47,10 +48,9 @@ const App = () => {
 
   const loadList = async () => {
     try {
-      const res = await getList(
-        isAuthenticated().user._id,
-        isAuthenticated().token
-      );
+      const res =
+        isAuthenticated() &&
+        (await getList(isAuthenticated().user._id, isAuthenticated().token));
       setList(res.data);
     } catch (error: any) {
       message.error(error.response.data, 4);
@@ -59,10 +59,12 @@ const App = () => {
 
   const loadMyBooks = async () => {
     try {
-      const res = await getMyBooks(
-        isAuthenticated().user._id,
-        isAuthenticated().token
-      );
+      const res =
+        isAuthenticated() &&
+        (await getUserBooks(
+          isAuthenticated().user._id,
+          isAuthenticated().token
+        ));
       setMyBooks(res.data);
     } catch (error: any) {
       if (error.response.status === 400) message.error(error.response.data, 4);
@@ -103,6 +105,15 @@ const App = () => {
                   element={
                     <PrivateRoute>
                       <Settings />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  path='/books/:userId'
+                  element={
+                    <PrivateRoute>
+                      <UserBooks />
                     </PrivateRoute>
                   }
                 />

@@ -65,9 +65,11 @@ exports.getBooks = async (req, res) => {
   }
 };
 
-exports.getMyBooks = async (req, res) => {
+exports.getUserBooks = async (req, res) => {
   try {
-    const book = await Book.find({ user: req.params.userId }).exec();
+    const book = await Book.find({ user: req.params.userId })
+      .populate('user')
+      .exec();
     return res.json(book);
   } catch (err) {
     return res.status(400).send('Error. Try again');

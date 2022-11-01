@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { message } from 'antd';
 
-const Header = ({ ...props }) => {
+const Header = () => {
   const navigate = useNavigate();
   const [value, setValue] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
