@@ -11,7 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { message, Popconfirm } from 'antd';
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
 import { addList, deleteList, editList } from '../actions/list';
 import AddListModal from './AddListModal';
@@ -25,6 +26,7 @@ const Sidebar = (
     > &
     ChakraProps & { as?: 'div' | undefined }
 ) => {
+  const navigate = useNavigate();
   const { user, token } = isAuthenticated();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [loading, setLoading] = useState(false);
@@ -232,7 +234,8 @@ const Sidebar = (
             fontWeight='500'
             fontSize='1.5rem'
             display='flex'
-            justifyContent='space-between'
+            justifyContent='flex-end'
+            alignItems='center'
           >
             <Tooltip
               hasArrow
@@ -241,11 +244,11 @@ const Sidebar = (
               color='black'
               placement='top'
             >
-              <Link to='/settings'>
+              <Box onClick={() => navigate('/settings')}>
                 <i className='fa-solid fa-user-gear'></i>
-              </Link>
+              </Box>
             </Tooltip>
-            <Box onClick={handleLogout}>
+            <Box onClick={handleLogout} pl='1rem'>
               <Tooltip
                 hasArrow
                 label='Sign out'

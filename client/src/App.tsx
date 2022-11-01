@@ -19,7 +19,7 @@ import {
   MyBooksContext,
 } from './context/Context';
 import { message } from 'antd';
-import Settings from './components/Settings';
+import Settings from './user/Settings';
 
 const App = () => {
   const location = useLocation();
