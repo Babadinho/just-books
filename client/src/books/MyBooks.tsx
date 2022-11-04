@@ -13,7 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import { useState, useContext, useEffect, forwardRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BookCard from '../components/BookCard';
 import Sidebar from '../components/Sidebar';
 import { ListContext, MyBooksContext } from '../context/Context';
@@ -23,6 +23,7 @@ import { isAuthenticated } from '../actions/auth';
 import { getActiveListBooks } from '../actions/book';
 
 const MyBooks = () => {
+  const navigate = useNavigate();
   const { user, token } = isAuthenticated();
   const { list, setList } = useContext(ListContext);
   const [activeNavId, setActiveNavId] = useState<any | null>();
@@ -145,11 +146,19 @@ const MyBooks = () => {
               fontWeight={'600'}
               display={'flex'}
               alignItems='center'
-              fontSize={{ base: '0.9rem', md: '0.9rem' }}
+              fontSize={{ base: '1.2rem', md: '1.2rem' }}
             >
-              <Link className='nav_link' to='/search'>
-                <i className='fa-solid fa-magnifying-glass'></i> Search books
+              <Link to='/search'>
+                <i className='fa-solid fa-magnifying-glass'></i>
               </Link>
+
+              <Box
+                pl='0.4rem'
+                cursor='pointer'
+                onClick={() => navigate('/settings')}
+              >
+                <i className='fa-solid fa-user-gear'></i>
+              </Box>
             </HStack>
             <IconButton
               bg='white'

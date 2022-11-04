@@ -281,7 +281,7 @@ const BookCard = ({ ...book }) => {
                   <Box
                     as='span'
                     color='gray.600'
-                    fontSize='0.9rem'
+                    fontSize='0.87rem'
                     pr='0.08rem'
                   >
                     {book.volumeInfo.averageRating &&

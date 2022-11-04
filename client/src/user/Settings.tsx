@@ -7,12 +7,11 @@ import {
   Input,
   Stack,
   Button,
-  Heading,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { message } from 'antd';
-import { authenticate, isAuthenticated, register } from '../actions/auth';
+import { authenticate, isAuthenticated } from '../actions/auth';
 import { UserContext } from '../context/Context';
 import { editUser } from '../actions/user';
 
@@ -68,24 +67,41 @@ const Settings = () => {
     setValues({ ...values, username: user.username });
   }, [setUser]);
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('just-books');
+    window.location.reload();
+  };
+
   return (
     <>
       <Flex align={'center'} justify={'center'}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6} w={'60vh'}>
-          <Stack align={'center'}>
-            <Heading fontSize={'3xl'} color={'orange.500'} textAlign='center'>
-              Welcome to your profile settings {user && user.username}
-            </Heading>
-            <Text fontSize={'1xl'} color={'gray.600'} align={'center'}>
-              Edit your username or change your password below
-            </Text>
-          </Stack>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={3} w={'75vh'}>
           <Box
             rounded={'lg'}
             bg={useColorModeValue('white', 'gray.700')}
             boxShadow={'lg'}
-            p={8}
+            p={{ base: '1.3rem', md: '2rem' }}
           >
+            <Box
+              pl='0.4rem'
+              cursor='pointer'
+              fontSize='1rem'
+              color='gray.600'
+              onClick={handleLogout}
+              mb='1rem'
+              textAlign='right'
+            >
+              <i className='fa-solid fa-right-from-bracket'></i> Logout
+            </Box>
+            <Text
+              fontSize={{ base: '1.1rem', md: '1.3rem' }}
+              color={'orange.500'}
+              align={'center'}
+              mb='1.5rem'
+            >
+              Edit your username or change your password below
+            </Text>
+
             <Stack spacing={4} color='gray.600'>
               <FormControl id='username' isRequired>
                 <FormLabel>Username</FormLabel>

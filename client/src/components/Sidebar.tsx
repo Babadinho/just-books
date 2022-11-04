@@ -5,14 +5,11 @@ import {
   OmitCommonProps,
   Text,
   useDisclosure,
-  Tooltip,
   Stack,
   Input,
 } from '@chakra-ui/react';
 import { message, Popconfirm } from 'antd';
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
 import { addList, deleteList, editList } from '../actions/list';
 import AddListModal from './AddListModal';
@@ -26,7 +23,6 @@ const Sidebar = (
     > &
     ChakraProps & { as?: 'div' | undefined }
 ) => {
-  const navigate = useNavigate();
   const { user, token } = isAuthenticated();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [loading, setLoading] = useState(false);
@@ -86,11 +82,6 @@ const Sidebar = (
     } catch (error: any) {
       console.log(error);
     }
-  };
-
-  const handleLogout = () => {
-    window.localStorage.removeItem('just-books');
-    window.location.reload();
   };
 
   return (
@@ -228,39 +219,6 @@ const Sidebar = (
               ))}
           </Flex>
         </Flex>
-        <Box pl='6' px='4' py='4' w='full' position='absolute' bottom='0'>
-          <Box
-            cursor='pointer'
-            fontWeight='500'
-            fontSize='1.5rem'
-            display='flex'
-            justifyContent='space-between'
-            alignItems='center'
-          >
-            <Tooltip
-              hasArrow
-              label='My settings'
-              bg='gray.300'
-              color='black'
-              placement='top'
-            >
-              <Box onClick={() => navigate('/settings')}>
-                <i className='fa-solid fa-user-gear'></i>
-              </Box>
-            </Tooltip>
-            <Box onClick={handleLogout} pl='1rem'>
-              <Tooltip
-                hasArrow
-                label='Sign out'
-                bg='gray.300'
-                color='black'
-                placement='top'
-              >
-                <i className='fa-solid fa-right-from-bracket'></i>
-              </Tooltip>
-            </Box>
-          </Box>
-        </Box>
         <AddListModal
           value={value}
           setValue={setValue}
