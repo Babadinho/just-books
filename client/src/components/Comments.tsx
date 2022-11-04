@@ -5,6 +5,7 @@ import { addComment, getComments, addCommentReply } from '../actions/comment';
 import { isAuthenticated } from '../actions/auth';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { slice } from 'lodash';
 
 const ShowComments = ({
   replyValue,
@@ -89,13 +90,17 @@ const ShowComments = ({
 
 const Comments = ({ params }: any) => {
   const { user, token } = isAuthenticated();
-  let [value, setValue] = useState<any | null>('');
-  let [replyValue, setReplyValue] = useState<any | null>('');
-  let [comments, setComments] = useState<any | null>('');
-  let [replyingComment, setReplyingComment] = useState<any | null>('');
+  const [value, setValue] = useState<any | null>('');
+  const [replyValue, setReplyValue] = useState<any | null>('');
+  const [comments, setComments] = useState<any | null>('');
+  const [replyingComment, setReplyingComment] = useState<any | null>('');
   const [loading, setLoading] = useState(false);
   const [replyLoading, setReplyLoading] = useState(false);
+  const [loadComplete, setLoadComplete] = useState(false);
+  const [index, setIndex] = useState(5);
+  let initialComments = slice(comments, 0, index);
 
+  // get comment replies
   const commentReplies = (commentId: any) => {
     return (
       comments &&
@@ -111,6 +116,15 @@ const Comments = ({ params }: any) => {
       }
     } catch (error: any) {
       if (error.response.status === 400) console.log(error.response.data);
+    }
+  };
+
+  const loadMoreComments = () => {
+    setIndex(index + 5);
+    if (index >= comments.length) {
+      setLoadComplete(true);
+    } else {
+      setLoadComplete(false);
     }
   };
 
@@ -213,8 +227,9 @@ const Comments = ({ params }: any) => {
           <Box as='span'>{comments.length > 1 ? 'comments' : 'comment'}</Box>
         </chakra.h1>
       )}
-      {comments &&
-        comments.map((comment: any) => {
+      {index &&
+        initialComments &&
+        initialComments.map((comment: any) => {
           {
             return (
               !comment.parentId && (
@@ -238,6 +253,24 @@ const Comments = ({ params }: any) => {
             );
           }
         })}
+      {!loadComplete && comments.length > index && (
+        <Flex justifyContent='center'>
+          <Button
+            variant='outline'
+            rounded='0'
+            size='sm'
+            fontWeight='500'
+            color='gray.600'
+            _hover={{
+              bg: '#ccc',
+              color: 'white',
+            }}
+            onClick={loadMoreComments}
+          >
+            Load more
+          </Button>
+        </Flex>
+      )}
     </Box>
   );
 };
