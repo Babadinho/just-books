@@ -23,6 +23,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
 import { addBook, removeBook, viewBook } from '../actions/book';
+import Comments from '../components/Comments';
 import { ListContext, MyBooksContext } from '../context/Context';
 
 const ViewBook = () => {
@@ -123,7 +124,7 @@ const ViewBook = () => {
               bg='white'
               shadow='lg'
               rounded='md'
-              maxH={'1xl'}
+              maxH={'38rem'}
               overflow='hidden'
               mr={{ md: '1rem' }}
               mb='1rem'
@@ -428,6 +429,9 @@ const ViewBook = () => {
                   </Flex>
                 </Box>
               </Flex>
+              <Box>
+                <Comments params={params} />
+              </Box>
             </Box>
           </Flex>
         )}

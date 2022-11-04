@@ -28,6 +28,9 @@ const BookSchema = new Schema(
       publishedDate: {
         type: String,
       },
+      averageRating: {
+        type: Number,
+      },
       imageLinks: {
         type: Object,
       },

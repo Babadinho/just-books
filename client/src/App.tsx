@@ -110,7 +110,7 @@ const App = () => {
                 />
 
                 <Route
-                  path='/books/:userId'
+                  path='/user/:userId'
                   element={
                     <PrivateRoute>
                       <UserBooks />

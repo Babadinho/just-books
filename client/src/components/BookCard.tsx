@@ -1,3 +1,4 @@
+import { StarIcon } from '@chakra-ui/icons';
 import {
   Box,
   Flex,
@@ -44,6 +45,7 @@ const BookCard = ({ ...book }) => {
         authors: book.volumeInfo.authors,
         publisher: book.volumeInfo.publisher,
         publishedDate: book.volumeInfo.publishedDate,
+        averageRating: book.volumeInfo.averageRating,
         imageLinks: book.volumeInfo.imageLinks,
       },
       list: selectOption,
@@ -253,7 +255,12 @@ const BookCard = ({ ...book }) => {
                 </chakra.p>
               </Flex>
 
-              <Flex mt={5} alignItems='center' justifyContent='flex-start'>
+              <Flex
+                mt={5}
+                alignItems='center'
+                justifyContent='space-between'
+                align='center'
+              >
                 <Link to={`/book/${book.id}`}>
                   <chakra.button
                     px={2}
@@ -269,6 +276,26 @@ const BookCard = ({ ...book }) => {
                     More details
                   </chakra.button>
                 </Link>
+
+                <Box display='flex' alignItems='center'>
+                  <Box
+                    as='span'
+                    color='gray.600'
+                    fontSize='0.9rem'
+                    pr='0.08rem'
+                  >
+                    {book.volumeInfo.averageRating &&
+                      book.volumeInfo.averageRating}
+                  </Box>
+
+                  {book.volumeInfo.averageRating && (
+                    <StarIcon
+                      fontSize='0.75rem'
+                      color='gold'
+                      alignSelf='center'
+                    />
+                  )}
+                </Box>
               </Flex>
             </Box>
           </Flex>
