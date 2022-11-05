@@ -6,9 +6,9 @@ exports.editUser = async (req, res) => {
   try {
     const { details } = req.body;
 
-    let user = await User.findOne({
-      _id: req.params.userId,
-    }).exec();
+    let user = await User.findById(req.params.userId)
+      .select('+password')
+      .exec();
 
     if (!details.new_password) {
       if (!details.username && !details.password)
@@ -69,7 +69,7 @@ exports.editUser = async (req, res) => {
           });
 
           // send response to client
-          res.json({
+          return res.json({
             token,
             user: {
               _id: user._id,
