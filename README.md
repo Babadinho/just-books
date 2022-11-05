@@ -4,12 +4,12 @@ Find books by book name, author or publisher using Google books API. This projec
 
 ### Features
 
-Advanced search
-Create and manage lists
-Add books to list
-User comments
-Manage user profile
-View other users books when you click on their name
+-Advanced search
+-Create and manage lists
+-Add books to list
+-User comments
+-Manage user profile
+-View other users books when you click on their name
 
 ### Demo
 
