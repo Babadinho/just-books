@@ -13,6 +13,9 @@ export const searchBook = async (
 export const getBooks = async () =>
   await axios.get(`${process.env.REACT_APP_URL}/books`);
 
+export const getBookCount = async (bookId: any) =>
+  await axios.get(`${process.env.REACT_APP_URL}/book/${bookId}`);
+
 export const getUserBooks = async (userId: any, token: any) =>
   await axios.get(`${process.env.REACT_APP_URL}/books/${userId}`, {
     headers: {

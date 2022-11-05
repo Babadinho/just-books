@@ -15,6 +15,15 @@ exports.addBook = async (req, res) => {
   }
 };
 
+exports.getBookCount = async (req, res) => {
+  try {
+    const book = await Book.find({ id: req.params.bookId }).count();
+    return res.json(book);
+  } catch (err) {
+    return res.status(400).send('Error. Try again');
+  }
+};
+
 exports.removeBook = async (req, res) => {
   const { bookId } = req.body;
 

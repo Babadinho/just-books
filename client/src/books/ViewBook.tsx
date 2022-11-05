@@ -17,12 +17,13 @@ import {
   PopoverCloseButton,
   PopoverHeader,
   PopoverArrow,
+  Badge,
 } from '@chakra-ui/react';
 import { message, Popconfirm, Select } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
-import { addBook, removeBook, viewBook } from '../actions/book';
+import { addBook, removeBook, viewBook, getBookCount } from '../actions/book';
 import Comments from '../components/Comments';
 import { ListContext, MyBooksContext } from '../context/Context';
 
@@ -33,6 +34,7 @@ const ViewBook = () => {
   const { myBooks, setMyBooks } = useContext(MyBooksContext);
   const { list } = useContext(ListContext);
   const [book, setBook] = useState<any | null>([]);
+  const [bookCount, setBookCount] = useState<any | null>([]);
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [loading, setLoading] = useState(false);
   const [selectOption, setSelectOption] = useState<any | null>('');
@@ -52,6 +54,17 @@ const ViewBook = () => {
         setBook(res.data.volumeInfo);
         setAccessInfo(res.data.accessInfo);
         setBookId(res.data.id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCount = async () => {
+    try {
+      const res = await getBookCount(params.bookId);
+      if (res.data) {
+        setBookCount(res.data);
       }
     } catch (error) {
       console.log(error);
@@ -101,6 +114,7 @@ const ViewBook = () => {
 
   useEffect(() => {
     getBook();
+    getCount();
     setSelectOption(list && list[0]._id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myBooks]);
@@ -136,7 +150,7 @@ const ViewBook = () => {
                 fit='fill'
                 objectPosition='center'
                 src={book.imageLinks && book.imageLinks.thumbnail}
-                alt='avatar'
+                alt='Book image'
               />
 
               <Flex alignItems='center' px={6} py={3} bg='orange.500'>
@@ -253,7 +267,7 @@ const ViewBook = () => {
             >
               <Flex justifyContent='space-between' alignItems='center'>
                 <Text
-                  color='gray.700'
+                  color='gray.600'
                   fontSize='lg'
                   fontWeight='700'
                   rounded='md'
@@ -325,13 +339,49 @@ const ViewBook = () => {
                   }}
                   fontSize='0.94rem'
                   lineHeight='1.65rem'
+                  textAlign='justify'
                 >
                   {book.description &&
                     book.description.replace(/(<([^>]+)>)/gi, '')}
                 </chakra.p>
               </Box>
 
-              <Flex justifyContent='space-between' alignItems='center' mt={10}>
+              {bookCount && bookCount > 0 && (
+                <Flex justify='flex-end'>
+                  <Box
+                    rounded='1rem'
+                    bg='orange.50'
+                    fontWeight='500'
+                    className='selectable'
+                    px='0.5rem'
+                    mt='1.5rem'
+                  >
+                    <Box display='flex' alignItems='center'>
+                      <Box as='span' fontSize='0.7rem' pr='0.3rem'>
+                        <i className='fa-solid fa-user'></i>
+                      </Box>{' '}
+                      <Box
+                        as='span'
+                        color='gray.600'
+                        fontSize='0.83rem'
+                        pt='0.05rem'
+                        className='selectable'
+                      >
+                        {`${bookCount && bookCount} ${
+                          bookCount === 1 ? 'user' : 'users'
+                        } added this book to their
+                        list`}
+                      </Box>
+                    </Box>
+                  </Box>
+                </Flex>
+              )}
+
+              <Flex
+                justifyContent='space-between'
+                alignItems='center'
+                mt='1.5rem'
+              >
                 <Box>
                   <Link
                     px={3}
