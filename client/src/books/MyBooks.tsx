@@ -111,7 +111,7 @@ const MyBooks = ({ loadBooks }: any) => {
           />
         </DrawerContent>
       </Drawer>
-      <Box transition='.3s ease'>
+      <Box transition='.5s ease'>
         <Flex
           h={16}
           alignItems={'center'}

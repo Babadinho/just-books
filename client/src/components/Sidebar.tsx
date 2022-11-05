@@ -161,6 +161,7 @@ const Sidebar = (
                               textTransform='capitalize'
                               color='gray.700'
                               width='90%'
+                              autoFocus
                               isRequired
                               onChange={(e) => setEditValue(e.target.value)}
                             />
