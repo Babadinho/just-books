@@ -14,6 +14,7 @@ import {
   PopoverCloseButton,
   Button,
   Tooltip,
+  Badge,
   useDisclosure,
 } from '@chakra-ui/react';
 import { message, Select, Popconfirm } from 'antd';
@@ -277,25 +278,64 @@ const BookCard = ({ ...book }) => {
                   </chakra.button>
                 </Link>
 
-                <Box display='flex' alignItems='center'>
-                  <Box
-                    as='span'
-                    color='gray.600'
-                    fontSize='0.87rem'
-                    pr='0.08rem'
-                  >
-                    {book.volumeInfo.averageRating &&
-                      book.volumeInfo.averageRating}
-                  </Box>
-
+                <Flex align='center'>
                   {book.volumeInfo.averageRating && (
-                    <StarIcon
-                      fontSize='0.75rem'
-                      color='gold'
-                      alignSelf='center'
-                    />
+                    <Badge
+                      rounded='1rem'
+                      mr='0.5rem'
+                      bg='orange.50'
+                      fontWeight='500'
+                    >
+                      <Flex align='center'>
+                        <Box color='gray.600' fontSize='0.83rem' mr='0.08rem'>
+                          {book.volumeInfo.averageRating &&
+                            book.volumeInfo.averageRating}
+                        </Box>
+
+                        <Box pb='0.25rem'>
+                          {book.volumeInfo.averageRating && (
+                            <StarIcon
+                              fontSize='0.7rem'
+                              color='gold'
+                              alignSelf='center'
+                            />
+                          )}
+                        </Box>
+                      </Flex>
+                    </Badge>
                   )}
-                </Box>
+
+                  {book && book.count && (
+                    <Badge rounded='1rem' bg='orange.50' fontWeight='500'>
+                      <Tooltip
+                        placement='top'
+                        hasArrow
+                        fontSize='0.86rem'
+                        label={`${book && book.count} ${
+                          book.count === 1 ? 'person' : 'people'
+                        } added this book`}
+                      >
+                        <Box
+                          display='flex'
+                          alignItems='center'
+                          cursor='pointer'
+                        >
+                          <Box as='span' fontSize='0.7rem' pr='0.15rem'>
+                            <i className='fa-solid fa-user'></i>
+                          </Box>{' '}
+                          <Box
+                            as='span'
+                            color='gray.600'
+                            fontSize='0.83rem'
+                            pt='0.05rem'
+                          >
+                            {book && book.count}
+                          </Box>
+                        </Box>
+                      </Tooltip>
+                    </Badge>
+                  )}
+                </Flex>
               </Flex>
             </Box>
           </Flex>

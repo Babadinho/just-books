@@ -33,6 +33,7 @@ exports.getBooks = async (req, res) => {
       {
         $group: {
           _id: '$id',
+          count: { $sum: 1 },
           id: {
             $last: '$id',
           },
