@@ -13,4 +13,6 @@ Find books by book name, author or publisher using Google books API. This projec
 
 ### Demo
 
-![My Image](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books.gif)
+![Demo Image](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books.png)
+
+![Demo Gif](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books.gif)
