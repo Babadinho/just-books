@@ -380,7 +380,7 @@ const ViewBook = () => {
               <Flex
                 justifyContent='space-between'
                 alignItems='center'
-                mt='1.5rem'
+                mt='2rem'
               >
                 <Box>
                   <Link
