@@ -262,8 +262,8 @@ const Comments = ({ params }: any) => {
             fontWeight='500'
             color='gray.600'
             _hover={{
-              bg: '#ccc',
-              color: 'white',
+              borderColor: 'orange.300',
+              color: 'orange.400',
             }}
             onClick={loadMoreComments}
           >

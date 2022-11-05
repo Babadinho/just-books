@@ -29,37 +29,26 @@ exports.removeBook = async (req, res) => {
 
 exports.getBooks = async (req, res) => {
   try {
-    const books = await Book.find()
-      .limit(21)
-      .sort({ createdAt: 'descending' })
-      .exec();
-    return res.json(books);
+    const books = await Book.aggregate([
+      {
+        $group: {
+          _id: '$id',
+          user: {
+            $first: '$user',
+          },
+          list: {
+            $first: '$list',
+          },
+          volumeInfo: {
+            $first: '$volumeInfo',
+          },
+        },
+      },
+      { $sort: { createdAt: 1 } },
+      { $limit: 21 },
+    ]);
 
-    // Book.aggregate([
-    //   {
-    //     $sort: {
-    //       id: 1,
-    //       createdAt: 1,
-    //     },
-    //   },
-    //   {
-    //     $group: {
-    //       _id: '$id',
-    //       createdAt: {
-    //         $last: '$createdAt',
-    //       },
-    //     },
-    //   },
-    //   {
-    //     $project: {
-    //       _id: 0,
-    //       id: '$_id',
-    //       createdAt: '$createdAt',
-    //     },
-    //   },
-    // ]).exec((books) => {
-    //   res.json(books);
-    // });
+    return res.json(books);
   } catch (err) {
     return res.status(400).send('Error. Try again');
   }
@@ -69,6 +58,7 @@ exports.getUserBooks = async (req, res) => {
   try {
     const book = await Book.find({ user: req.params.userId })
       .populate('user')
+      .sort({ createdAt: 'descending' })
       .exec();
     return res.json(book);
   } catch (err) {
@@ -80,7 +70,10 @@ exports.getActiveListBooks = async (req, res) => {
   const { listId } = req.body;
 
   try {
-    const books = await Book.find({ user: req.params.userId, list: listId });
+    const books = await Book.find({
+      user: req.params.userId,
+      list: listId,
+    }).sort({ createdAt: 'descending' });
     if (books) {
       res.json(books);
     }

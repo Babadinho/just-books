@@ -122,7 +122,7 @@ const ViewBook = () => {
           >
             <Box
               bg='white'
-              shadow='lg'
+              shadow='md'
               rounded='md'
               maxH={'38rem'}
               overflow='hidden'
@@ -247,7 +247,7 @@ const ViewBook = () => {
               px={8}
               py={4}
               rounded='lg'
-              shadow='lg'
+              shadow='md'
               bg='white'
               maxW={{ base: '100%', md: '100%', lg: '73%' }}
             >
