@@ -2,21 +2,10 @@ import { Box, Flex, HStack, Text, useColorModeValue } from '@chakra-ui/react';
 import { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
-import { getBooks } from '../actions/book';
-import { UserContext, BookContext } from '../context/Context';
+import { UserContext } from '../context/Context';
 
-const NavBar = () => {
+const NavBar = ({ loadBooks }: any) => {
   const { user } = useContext(UserContext);
-  const { setBooks } = useContext(BookContext);
-
-  const loadBooks = async () => {
-    try {
-      let res = await getBooks();
-      setBooks(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     localStorage.getItem('just-books');

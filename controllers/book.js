@@ -33,18 +33,24 @@ exports.getBooks = async (req, res) => {
       {
         $group: {
           _id: '$id',
+          id: {
+            $last: '$id',
+          },
           user: {
-            $first: '$user',
+            $last: '$user',
           },
           list: {
-            $first: '$list',
+            $last: '$list',
           },
           volumeInfo: {
-            $first: '$volumeInfo',
+            $last: '$volumeInfo',
+          },
+          createdAt: {
+            $last: '$createdAt',
           },
         },
       },
-      { $sort: { createdAt: 1 } },
+      { $sort: { createdAt: -1 } },
       { $limit: 21 },
     ]);
 

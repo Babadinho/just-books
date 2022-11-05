@@ -36,7 +36,7 @@ const Books = () => {
         >
           {books && (
             <Text>
-              <i className='fa-solid fa-star'></i> Trending books
+              <i className='fa-solid fa-fire'></i> Trending books
             </Text>
           )}
         </chakra.h1>

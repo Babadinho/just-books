@@ -17,6 +17,7 @@ import {
   Flex,
   Select,
   Button,
+  Image,
 } from '@chakra-ui/react';
 import BookCard from '../components/BookCard';
 import { Search2Icon } from '@chakra-ui/icons';

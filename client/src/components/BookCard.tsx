@@ -314,13 +314,6 @@ const BookCard = ({ ...book }) => {
               filterOption={(input, option) =>
                 (option!.children as unknown as string).includes(input)
               }
-              filterSort={(optionA, optionB) =>
-                (optionA!.children as unknown as string)
-                  .toUpperCase()
-                  .localeCompare(
-                    (optionB!.children as unknown as string).toUpperCase()
-                  )
-              }
               onChange={(value: { value: string; label: React.ReactNode }) => {
                 setSelectOption(value);
               }}

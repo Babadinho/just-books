@@ -13,6 +13,7 @@ import {
   Text,
   Button,
   Box,
+  Spinner,
 } from '@chakra-ui/react';
 
 const AddListModal = ({
@@ -39,7 +40,7 @@ const AddListModal = ({
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize='1.2rem' color='gray.700'>
+          <ModalHeader fontSize='1.1rem' color='gray.700'>
             Create new List
           </ModalHeader>
           <ModalCloseButton />
@@ -68,9 +69,17 @@ const AddListModal = ({
 
           <ModalFooter>
             <Button
-              loadingText='Submitting'
-              size='md'
               mr='0.7rem'
+              variant='ghost'
+              onClick={() => {
+                onClose();
+                setValue('');
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              loadingText='Submitting'
               fontWeight='500'
               bg={'orange.500'}
               color={'white'}
@@ -79,24 +88,7 @@ const AddListModal = ({
               }}
               onClick={handleSubmit}
             >
-              {loading ? (
-                <Box className='spinner-border text-light' role='status'>
-                  <Box as='span' className='sr-only'>
-                    Loading...
-                  </Box>
-                </Box>
-              ) : (
-                'Submit'
-              )}
-            </Button>
-            <Button
-              variant='ghost'
-              onClick={() => {
-                onClose();
-                setValue('');
-              }}
-            >
-              Cancel
+              {loading ? <Spinner /> : 'Submit'}
             </Button>
           </ModalFooter>
         </ModalContent>

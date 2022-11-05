@@ -22,7 +22,7 @@ import Pagination from '@choc-ui/paginator';
 import { isAuthenticated } from '../actions/auth';
 import { getActiveListBooks } from '../actions/book';
 
-const MyBooks = () => {
+const MyBooks = ({ loadBooks }: any) => {
   const navigate = useNavigate();
   const { user, token } = isAuthenticated();
   const { list, setList } = useContext(ListContext);
@@ -134,7 +134,7 @@ const MyBooks = () => {
               color: 'gray.100',
             }}
           >
-            <Link to='/' className='logo'>
+            <Link to='/' className='logo' onClick={loadBooks}>
               <Flex alignItems={'center'}>
                 <i className='fa-solid fa-book logo-book'></i>{' '}
                 <Text ml='1'>Justbooks</Text>

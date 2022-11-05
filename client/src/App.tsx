@@ -86,7 +86,9 @@ const App = () => {
         <BookContext.Provider value={book}>
           <ListContext.Provider value={myList}>
             <MyBooksContext.Provider value={myBook}>
-              {location.pathname !== '/my-books' && <NavBar />}
+              {location.pathname !== '/my-books' && (
+                <NavBar loadBooks={loadBooks} />
+              )}
               <Routes>
                 <Route path='/' element={<Books />} />
                 <Route path='/search' element={<SearchBooks />} />
@@ -96,7 +98,7 @@ const App = () => {
                   path='/my-books'
                   element={
                     <PrivateRoute>
-                      <MyBooks />
+                      <MyBooks loadBooks={loadBooks} />
                     </PrivateRoute>
                   }
                 />

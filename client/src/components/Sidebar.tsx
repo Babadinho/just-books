@@ -112,7 +112,7 @@ const Sidebar = (
             flexDir='row'
           >
             <>
-              My List{' '}
+              My Lists{' '}
               <Box
                 pl='0.5rem'
                 onClick={onOpen}
