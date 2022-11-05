@@ -79,7 +79,7 @@ const Header = () => {
           color='gray.600'
           lineHeight='base'
         >
-          Search for books anywhere, you can search for books using the book
+          Search for books anywhere. You can search for books using the book
           name, author name, or publisher. Just enter keyword in the search and
           select search criteria.
         </chakra.p>
