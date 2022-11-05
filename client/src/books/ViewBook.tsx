@@ -347,14 +347,14 @@ const ViewBook = () => {
               </Box>
 
               {bookCount && bookCount > 0 && (
-                <Flex justify='flex-end'>
+                <Flex justify={{ sm: 'flex-start', md: 'flex-end' }}>
                   <Box
                     rounded='1rem'
                     bg='orange.50'
                     fontWeight='500'
                     className='selectable'
                     px='0.5rem'
-                    mt='1.5rem'
+                    mt='1.7rem'
                   >
                     <Box display='flex' alignItems='center'>
                       <Box as='span' fontSize='0.7rem' pr='0.3rem'>
@@ -380,7 +380,7 @@ const ViewBook = () => {
               <Flex
                 justifyContent='space-between'
                 alignItems='center'
-                mt='2rem'
+                mt='2.2rem'
               >
                 <Box>
                   <Link
