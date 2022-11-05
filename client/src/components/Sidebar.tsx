@@ -206,6 +206,7 @@ const Sidebar = (
                         onConfirm={() => handleDeleteList(l._id)}
                         okText='Yes'
                         cancelText='No'
+                        zIndex={99999}
                       >
                         <Text
                           fontSize='0.8rem'
