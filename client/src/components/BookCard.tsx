@@ -287,7 +287,12 @@ const BookCard = ({ ...book }) => {
                       fontWeight='500'
                     >
                       <Flex align='center'>
-                        <Box color='gray.600' fontSize='0.83rem' mr='0.08rem'>
+                        <Box
+                          color='gray.600'
+                          fontSize='0.82rem'
+                          mr='0.08rem'
+                          className='selectable'
+                        >
                           {book.volumeInfo.averageRating &&
                             book.volumeInfo.averageRating}
                         </Box>
@@ -310,9 +315,9 @@ const BookCard = ({ ...book }) => {
                       <Tooltip
                         placement='top'
                         hasArrow
-                        fontSize='0.86rem'
+                        fontSize='0.8rem'
                         label={`${book && book.count} ${
-                          book.count === 1 ? 'person' : 'people'
+                          book.count === 1 ? 'user' : 'users'
                         } added this book`}
                       >
                         <Box
@@ -320,7 +325,7 @@ const BookCard = ({ ...book }) => {
                           alignItems='center'
                           cursor='pointer'
                         >
-                          <Box as='span' fontSize='0.7rem' pr='0.15rem'>
+                          <Box as='span' fontSize='0.68rem' pr='0.15rem'>
                             <i className='fa-solid fa-user'></i>
                           </Box>{' '}
                           <Box
@@ -328,6 +333,7 @@ const BookCard = ({ ...book }) => {
                             color='gray.600'
                             fontSize='0.83rem'
                             pt='0.05rem'
+                            className='selectable'
                           >
                             {book && book.count}
                           </Box>
