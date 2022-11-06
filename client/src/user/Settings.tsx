@@ -65,6 +65,7 @@ const Settings = () => {
 
   useEffect(() => {
     setValues({ ...values, username: user.username });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setUser]);
 
   const handleLogout = () => {

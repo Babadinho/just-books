@@ -55,6 +55,7 @@ const UserBooks = () => {
 
   useEffect(() => {
     loadUserBooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myBooks]);
 
   return (

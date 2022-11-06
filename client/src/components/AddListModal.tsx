@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef } from 'react';
 import {
   Modal,
   ModalOverlay,
@@ -12,7 +12,6 @@ import {
   Input,
   Text,
   Button,
-  Box,
   Spinner,
 } from '@chakra-ui/react';
 

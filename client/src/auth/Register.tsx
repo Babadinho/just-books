@@ -16,10 +16,17 @@ import { message } from 'antd';
 import { authenticate, register } from '../actions/auth';
 import { UserContext } from '../context/Context';
 
+interface UserInfo {
+  _id: string;
+  username: string;
+  password: string;
+  confirm_password: string;
+}
+
 const Register = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<UserInfo | null>({
     _id: '',
     username: '',
     password: '',
@@ -29,7 +36,7 @@ const Register = () => {
 
   const { username, password, confirm_password } = values;
 
-  const handleChange = (name: string) => (e: { target: { value: any } }) => {
+  const handleChange = (name: string) => (e: { target: { value: string } }) => {
     setValues({ ...values, [name]: e.target.value });
   };
 
@@ -67,14 +74,7 @@ const Register = () => {
   return (
     <>
       <Flex align={'center'} justify={'center'}>
-        <Stack
-          spacing={8}
-          mx={'auto'}
-          maxW={'lg'}
-          py={12}
-          px={6}
-          // w={{ sm: 'lg', md: '60vh' }}
-        >
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading fontSize={'3xl'} color={'orange.500'}>
               Register an Account

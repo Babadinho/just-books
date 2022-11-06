@@ -16,10 +16,15 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/Context';
 import { message } from 'antd';
 
+interface UserInfo {
+  username: string;
+  password: string;
+}
+
 const Login = () => {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<UserInfo | null>({
     username: '',
     password: '',
   });
@@ -27,7 +32,7 @@ const Login = () => {
 
   const { username, password } = values;
 
-  const handleChange = (name: string) => (e: { target: { value: any } }) => {
+  const handleChange = (name: string) => (e: { target: { value: string } }) => {
     setValues({ ...values, [name]: e.target.value });
   };
 
