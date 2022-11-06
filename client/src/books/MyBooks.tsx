@@ -26,10 +26,10 @@ const MyBooks = ({ loadBooks }: any) => {
   const navigate = useNavigate();
   const { user, token } = isAuthenticated();
   const { list, setList } = useContext(ListContext);
-  const [activeNavId, setActiveNavId] = useState<any | null>();
+  const [activeNavId, setActiveNavId] = useState<string | null>();
   const sidebar = useDisclosure();
   const { myBooks } = useContext(MyBooksContext);
-  const [activeListBooks, setActiveListBooks] = useState<any | null>('');
+  const [activeListBooks, setActiveListBooks] = useState<Array<{}> | null>();
   const [current, setCurrent] = useState(1);
   const pageSize = 8;
   const offset = (current - 1) * pageSize;
@@ -85,10 +85,12 @@ const MyBooks = ({ loadBooks }: any) => {
 
   useEffect(() => {
     loadActiveListBooks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list, myBooks, activeNavId]);
 
   useEffect(() => {
     setActiveNavId(list && list.length > 0 && list[0]._id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myBooks]);
 
   return (
@@ -204,11 +206,11 @@ const MyBooks = ({ loadBooks }: any) => {
             >
               {books_data &&
                 books_data.length > 0 &&
-                books_data.map((book: any, i: any) => {
-                  if (book.list === activeNavId && activeNavId) {
-                    return <BookCard {...book} key={i} />;
-                  }
-                })}
+                books_data.map(
+                  (book: any, i: any) =>
+                    book.list === activeNavId &&
+                    activeNavId && <BookCard {...book} key={i} />
+                )}
             </SimpleGrid>
             {activeListBooks && activeListBooks.length > pageSize && (
               <Box pl={{ sm: '0', md: '2rem' }} mt='2rem'>

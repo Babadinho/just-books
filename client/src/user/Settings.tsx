@@ -15,10 +15,16 @@ import { authenticate, isAuthenticated } from '../actions/auth';
 import { UserContext } from '../context/Context';
 import { editUser } from '../actions/user';
 
+interface UserInfo {
+  username: string;
+  password: string;
+  new_password: string;
+}
+
 const Settings = () => {
   const { setUser } = useContext(UserContext);
   const { user, token } = isAuthenticated();
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<UserInfo | null>({
     username: '',
     password: '',
     new_password: '',

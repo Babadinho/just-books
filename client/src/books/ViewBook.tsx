@@ -34,12 +34,12 @@ const ViewBook = () => {
   const { myBooks, setMyBooks } = useContext(MyBooksContext);
   const { list } = useContext(ListContext);
   const [book, setBook] = useState<any | null>([]);
-  const [bookCount, setBookCount] = useState<any | null>([]);
+  const [bookCount, setBookCount] = useState<number>();
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [loading, setLoading] = useState(false);
-  const [selectOption, setSelectOption] = useState<any | null>('');
+  const [selectOption, setSelectOption] = useState<string>('');
   const [accessInfo, setAccessInfo] = useState<any | null>([]);
-  const [bookId, setBookId] = useState<any | null>('');
+  const [bookId, setBookId] = useState<string>('');
 
   // check book in user List to allow for Add or Remove
   const checkList =
@@ -506,7 +506,7 @@ const ViewBook = () => {
                     (optionB!.children as unknown as string).toUpperCase()
                   )
               }
-              onChange={(value: { value: string; label: React.ReactNode }) => {
+              onChange={(value: string) => {
                 setSelectOption(value);
               }}
             >

@@ -29,8 +29,8 @@ const BookCard = ({ ...book }) => {
   const { list } = useContext(ListContext);
   const { myBooks, setMyBooks } = useContext(MyBooksContext);
   const { onOpen, onClose, isOpen } = useDisclosure();
-  const [loading, setLoading] = useState(false);
-  const [selectOption, setSelectOption] = useState<any | null>('');
+  const [loading, setLoading] = useState<Boolean>(false);
+  const [selectOption, setSelectOption] = useState<string>('');
 
   const { Option } = Select;
 
@@ -360,7 +360,7 @@ const BookCard = ({ ...book }) => {
               filterOption={(input, option) =>
                 (option!.children as unknown as string).includes(input)
               }
-              onChange={(value: { value: string; label: React.ReactNode }) => {
+              onChange={(value: string) => {
                 setSelectOption(value);
               }}
             >

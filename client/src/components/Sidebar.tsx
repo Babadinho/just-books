@@ -25,11 +25,11 @@ const Sidebar = (
 ) => {
   const { user, token } = isAuthenticated();
   const { isOpen, onClose, onOpen } = useDisclosure();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState('');
-  const [value, setValue] = useState<any | null>('');
-  const [edit, setEdit] = useState<any | null>('');
-  const [editValue, setEditValue] = useState<any | null>('');
+  const [value, setValue] = useState<string>('');
+  const [edit, setEdit] = useState<string>('');
+  const [editValue, setEditValue] = useState<string>('');
 
   //get default list and store in variable
   const defaultActive = list && list.length > 0 && list[0]._id;

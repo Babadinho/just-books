@@ -25,11 +25,11 @@ import { message } from 'antd';
 
 const SearchBooks = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState<any | null>([]);
+  const [search, setSearch] = useState<Array<{}> | null>();
   const [bookCount, setBookCount] = useState<number>();
-  const [value, setValue] = useState<any>('');
+  const [value, setValue] = useState<string | string[]>('');
   const [order, setOrder] = useState('relevance');
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState<string>('');
   const [start, setStart] = useState<number>(0);
   const [max, setMax] = useState<number>(21);
   const [isError, setIsError] = useState<boolean>(false);

@@ -24,10 +24,10 @@ import UserBooks from './user/UserBooks';
 
 const App = () => {
   const location = useLocation();
-  const [user, setUser] = useState<any | null>(null);
-  const [books, setBooks] = useState<any | null>(null);
-  const [list, setList] = useState<any | null>(null);
-  const [myBooks, setMyBooks] = useState<any | null>('');
+  const [user, setUser] = useState<string | null>(null);
+  const [books, setBooks] = useState<Array<{}> | null>();
+  const [list, setList] = useState<Array<{}> | null>();
+  const [myBooks, setMyBooks] = useState<Array<{}> | null>();
   let value: any;
   let book: any;
   let myList: any;
