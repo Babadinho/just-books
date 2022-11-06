@@ -82,6 +82,7 @@ const BookCard = ({ ...book }) => {
 
   useEffect(() => {
     setSelectOption(list && list[0]._id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myBooks]);
 
   return (

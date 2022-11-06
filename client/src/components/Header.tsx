@@ -9,7 +9,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Text,
 } from '@chakra-ui/react';
 import { message } from 'antd';
 
