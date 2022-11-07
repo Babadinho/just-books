@@ -5,6 +5,7 @@ Find books by book name, author or publisher using Google books API. This projec
 ### Features
 
 - Advanced search
+- Show recent searches
 - Create and manage lists
 - Add books to list
 - User comments
@@ -13,8 +14,12 @@ Find books by book name, author or publisher using Google books API. This projec
 
 ### Demo
 
-![Demo Image](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books.png)
+![Home](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books.png)
 
-![Demo Image2](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books-mylist.png)
+![My Books](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books-mylist.png)
 
-![Demo Gif](https://github.com/Babadinho/just-books/raw/main/client/public/Just-books.gif)
+![View Book](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books-view-book.png)
+
+![Search 1](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books-search.png)
+
+![Search 2](https://raw.githubusercontent.com/babadinho/just-books/main/client/public/just-books-search1.png)
