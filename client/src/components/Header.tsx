@@ -11,13 +11,16 @@ import {
   InputRightElement,
 } from '@chakra-ui/react';
 import { message } from 'antd';
+import { addSearch } from '../actions/searches';
+import { isAuthenticated } from '../actions/auth';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { user } = isAuthenticated();
   const [value, setValue] = useState<string>('');
   const [isError, setIsError] = useState<boolean>(false);
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (value === '') {
       e.preventDefault();
@@ -28,6 +31,7 @@ const Header = () => {
     navigate(
       `/search/?q=${value}&orderBy=relevance&filterBy=&startIndex=0&maxResults=21`
     );
+    await addSearch({ userId: user ? user._id : null, query: value });
   };
 
   return (
@@ -92,7 +96,7 @@ const Header = () => {
           spacing={1}
           pt={8}
           mx='auto'
-          mb={8}
+          mb={'1.5rem'}
         >
           <InputGroup size='lg'>
             <Input

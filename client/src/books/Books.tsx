@@ -20,6 +20,22 @@ const Books = () => {
         }}
         mx='auto'
       >
+        {!books && (
+          <Flex
+            flexDir='column'
+            textAlign='center'
+            justifyContent='center'
+            mt='1rem'
+            mb='5rem'
+          >
+            <Text fontSize='4rem'>
+              <i className='fa-solid fa-book'></i>
+            </Text>
+            <Text fontSize='1.5rem' color='orange.500'>
+              Loading books.....
+            </Text>
+          </Flex>
+        )}
         <chakra.h1
           mb={'3.5rem'}
           fontSize={{
@@ -40,21 +56,7 @@ const Books = () => {
             </Text>
           )}
         </chakra.h1>
-        {!books && (
-          <Flex
-            flexDir='column'
-            textAlign='center'
-            justifyContent='center'
-            mt='4rem'
-          >
-            <Text fontSize='4rem'>
-              <i className='fa-solid fa-book'></i>
-            </Text>
-            <Text fontSize='1.5rem' color='orange.500'>
-              Loading books.....
-            </Text>
-          </Flex>
-        )}
+
         <SimpleGrid
           minChildWidth={{ base: 'auto', md: '22rem' }}
           spacing='2rem'

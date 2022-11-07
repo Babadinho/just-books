@@ -17,16 +17,22 @@ import {
   Flex,
   Select,
   Button,
+  GridItem,
+  Grid,
 } from '@chakra-ui/react';
 import BookCard from '../components/BookCard';
 import { Search2Icon } from '@chakra-ui/icons';
 import { message } from 'antd';
+import { addSearch, getSearches } from '../actions/searches';
+import { isAuthenticated } from '../actions/auth';
 
 const SearchBooks = () => {
   const navigate = useNavigate();
+  const { user } = isAuthenticated();
   const [search, setSearch] = useState<Array<{}> | null>();
   const [bookCount, setBookCount] = useState<number>();
   const [value, setValue] = useState<string | string[]>('');
+  const [searches, setSearches] = useState<Array<{}> | null>();
   const [order, setOrder] = useState('relevance');
   const [filter, setFilter] = useState<string>('');
   const [start, setStart] = useState<number>(0);
@@ -47,7 +53,16 @@ const SearchBooks = () => {
     }
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const loadSearches = async () => {
+    try {
+      let res = await getSearches();
+      setSearches(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (value === '') {
       e.preventDefault();
@@ -63,10 +78,12 @@ const SearchBooks = () => {
       `/search/?q=${value}&orderBy=relevance&filterBy=&startIndex=0&maxResults=21`
     );
     setFilter('');
+    await addSearch({ userId: user ? user._id : null, query: value });
   };
 
   useEffect(() => {
     q !== undefined && loadSearch();
+    loadSearches();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [q, order, filter, start, max]);
 
@@ -175,6 +192,66 @@ const SearchBooks = () => {
         }}
         mx='auto'
       >
+        {!search && (
+          <Box mt='1rem'>
+            <chakra.h1
+              mb={'1.5rem'}
+              fontSize={{
+                base: '2xl',
+                md: '2xl',
+              }}
+              fontWeight={{
+                base: 'bold',
+                md: 'extrabold',
+              }}
+              color='orange.500'
+              lineHeight='shorter'
+              textAlign={'center'}
+            >
+              <Text>
+                <i className='fa-solid fa-rss'></i> Recent searches
+              </Text>
+            </chakra.h1>
+            <Grid templateColumns='repeat(7, 1fr)'>
+              <GridItem colSpan={6} colStart={2} colEnd={7}>
+                <Box
+                  display='flex'
+                  flexWrap='wrap'
+                  justifyContent='center'
+                  flexDir={{ base: 'column', md: 'row' }}
+                  alignItems='center'
+                >
+                  {searches &&
+                    searches.length > 0 &&
+                    searches.map((search: any) => (
+                      <Text
+                        display='flex'
+                        alignItems='center'
+                        fontSize='1rem'
+                        mr='0.5rem'
+                        cursor='pointer'
+                        key={search.id}
+                        onClick={() =>
+                          navigate(
+                            `/search/?q=${search.query}&orderBy=relevance&filterBy=&startIndex=0&maxResults=21`
+                          )
+                        }
+                        _hover={{
+                          color: 'orange.500',
+                        }}
+                      >
+                        <Box as='span' fontSize='0.5rem' mr='0.1rem'>
+                          <i className='fa-solid fa-angles-right'></i>
+                        </Box>
+                        {search.query}
+                      </Text>
+                    ))}
+                </Box>
+              </GridItem>
+            </Grid>
+          </Box>
+        )}
+
         <chakra.h1
           mb={'3rem'}
           fontSize={{
