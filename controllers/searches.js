@@ -22,7 +22,7 @@ exports.getSearch = async (req, res) => {
         },
       },
       { $sort: { createdAt: -1 } },
-      { $limit: 20 },
+      { $limit: 30 },
     ]);
 
     return res.json(searches);
