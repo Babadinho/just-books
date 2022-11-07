@@ -150,10 +150,6 @@ const MyBooks = ({ loadBooks }: any) => {
               alignItems='center'
               fontSize={{ base: '1.2rem', md: '1.2rem' }}
             >
-              <Link to='/search'>
-                <i className='fa-solid fa-magnifying-glass'></i>
-              </Link>
-
               <Box
                 pl='0.4rem'
                 cursor='pointer'
@@ -247,6 +243,9 @@ const MyBooks = ({ loadBooks }: any) => {
           </Box>
         </Box>
       </Box>
+      <Link className='float-button' to='/search'>
+    <i className="fa-solid fa-magnifying-glass my-float"></i>
+  </Link>
     </Box>
   );
 };

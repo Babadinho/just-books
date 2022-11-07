@@ -118,3 +118,30 @@ width: 17rem !important;
   -ms-user-select: none;      
   user-select: none;
 }
+
+.float-button{
+	position: fixed;
+	width: 3.5rem;
+	height: 3.5rem;
+	bottom: 2.5rem;
+	right: 1.25rem;
+	background-color: #dd6b20;
+  text-decoration: none;
+	border-radius: 3.125rem;
+	text-align: center;
+  font-size: 1.125rem;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.float-button i {
+  color: #FFF;
+}
+
+.float-button:hover {
+  background-color: #c05621;
+  color: #FFF;
+}
+
+.my-float{
+	margin-top: 1.2rem !important;
+}
