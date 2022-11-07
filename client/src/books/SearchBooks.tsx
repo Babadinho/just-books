@@ -192,7 +192,7 @@ const SearchBooks = () => {
         }}
         mx='auto'
       >
-        {!search && (
+        {!search && searches && (
           <Box mt='1rem'>
             <chakra.h1
               mb={'1.5rem'}
@@ -225,8 +225,7 @@ const SearchBooks = () => {
                     searches.length > 0 &&
                     searches.map((search: any) => (
                       <Text
-                        display='flex'
-                        alignItems='center'
+                        textAlign='center'
                         fontSize='1rem'
                         mr='0.5rem'
                         cursor='pointer'

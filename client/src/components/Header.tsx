@@ -10,7 +10,6 @@ import {
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
-import { message } from 'antd';
 import { addSearch } from '../actions/searches';
 import { isAuthenticated } from '../actions/auth';
 
@@ -24,8 +23,7 @@ const Header = () => {
     e.preventDefault();
     if (value === '') {
       e.preventDefault();
-      setIsError(true);
-      message.error('Search field cannot be empty', 4);
+      navigate('/search');
       return;
     }
     navigate(
