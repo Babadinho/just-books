@@ -192,7 +192,7 @@ const SearchBooks = () => {
         }}
         mx='auto'
       >
-        {!search && searches && (
+        {!search && searches && searches.length > 0 && (
           <Box mt='1rem'>
             <chakra.h1
               mb={'1.5rem'}
