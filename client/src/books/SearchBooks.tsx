@@ -225,6 +225,8 @@ const SearchBooks = () => {
                     searches.length > 0 &&
                     searches.map((search: any) => (
                       <Text
+                      display='flex'
+                      alignItems='center'
                         textAlign='center'
                         fontSize='1rem'
                         mr='0.5rem'
