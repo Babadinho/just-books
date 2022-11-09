@@ -70,7 +70,7 @@ const Login = () => {
           maxW={'lg'}
           py={12}
           px={4}
-          w={{ sm: 'full', md: '55vh' }}
+          w={{ sm: 'full', md: '58vh' }}
         >
           <Stack align={'center'}>
             <Heading fontSize={'3xl'} color={'orange.500'}>

@@ -80,14 +80,14 @@ const Register = () => {
           maxW={'lg'}
           py={12}
           px={4}
-          w={{ sm: 'full', md: '55vh' }}
+          w={{ sm: 'full', md: '58vh' }}
         >
           <Stack align={'center'}>
-            <Heading fontSize={'3xl'} color={'orange.500'}>
+            <Heading fontSize={'3xl'} color={'orange.500'} textAlign='center'>
               Register an Account
             </Heading>
             <Text fontSize={'1xl'} color={'gray.600'} align={'center'}>
-              An account lets you add your favourite books to your list
+              An account lets you add and manage books in your list
             </Text>
           </Stack>
           <Box
