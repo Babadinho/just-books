@@ -97,6 +97,7 @@ const Settings = () => {
               onClick={handleLogout}
               mb='1rem'
               textAlign='right'
+              className='selectable'
             >
               <i className='fa-solid fa-right-from-bracket'></i> Logout
             </Box>
