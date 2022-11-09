@@ -126,7 +126,7 @@ const Login = () => {
                 </Button>
               </Stack>
               <Box textAlign='center' fontSize='0.95rem' pt='0.5rem'>
-                Already have an account?{' '}
+                Don't have an account?{' '}
                 <Link to='/register'>
                   {' '}
                   <Box
