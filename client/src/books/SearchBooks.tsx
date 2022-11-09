@@ -341,7 +341,7 @@ const SearchBooks = () => {
           //     Loading books.....
           //   </Text>
           // </Flex>
-          <Box className='loading-container' mt='4.5rem'>
+          <Box className='loading-container' mt='5.5rem'>
             <Box className='loading'></Box>
             <Box id='loading-text'>Loading books</Box>
           </Box>
