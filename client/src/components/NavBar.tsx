@@ -39,7 +39,9 @@ const NavBar = ({ loadBooks }: any) => {
             >
               <Link to='/' className='logo' onClick={loadBooks}>
                 <Flex alignItems={'center'}>
-                  <i className='fa-solid fa-book logo-book'></i>{' '}
+                  <Box as='span' pb='0.2rem'>
+                    <i className='fa-solid fa-book logo-book'></i>{' '}
+                  </Box>
                   <Text ml='1'>Justbooks</Text>
                 </Flex>
               </Link>
@@ -50,24 +52,22 @@ const NavBar = ({ loadBooks }: any) => {
             spacing={6}
             display={'flex'}
             fontWeight={'600'}
-            fontSize={{ base: '0.9rem', md: '0.9rem' }}
+            fontSize={{ base: '0.95rem', md: '0.95rem' }}
           >
             {isAuthenticated() && (
-              <Link className='nav_link' to='/my-books'>
-                <i className='fa-solid fa-bookmark'></i> My Books
-              </Link>
+              <Box>
+                <Link className='nav_link' to='/my-books'>
+                  <i className='fa-solid fa-bookmark'></i>&nbsp;My Books
+                </Link>
+              </Box>
             )}
             {!isAuthenticated() && (
-              <>
+              <Box>
                 <Link className='nav_link' to='/login'>
                   {' '}
-                  Login
+                  <i className='fa-solid fa-right-to-bracket'></i>&nbsp;Login
                 </Link>
-                <Link className={'nav_link'} to='/register'>
-                  {' '}
-                  Register
-                </Link>
-              </>
+              </Box>
             )}
           </HStack>
         </Flex>

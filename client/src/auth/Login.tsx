@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
 import { authenticate, login } from '../actions/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/Context';
 import { message } from 'antd';
 
@@ -63,14 +63,14 @@ const Login = () => {
 
   return (
     <>
-      <Flex align={'center'} justify={'center'}>
+      <Flex align={'center'} justify={'center'} mt='2rem'>
         <Stack
           spacing={8}
           mx={'auto'}
           maxW={'lg'}
           py={12}
-          px={6}
-          w={{ sm: 'full', md: '60vh' }}
+          px={4}
+          w={{ sm: 'full', md: '55vh' }}
         >
           <Stack align={'center'}>
             <Heading fontSize={'3xl'} color={'orange.500'}>
@@ -125,6 +125,19 @@ const Login = () => {
                   )}
                 </Button>
               </Stack>
+              <Box textAlign='center' fontSize='0.95rem' pt='0.5rem'>
+                Already have an account?{' '}
+                <Link to='/register'>
+                  {' '}
+                  <Box
+                    as='span'
+                    color='orange.500'
+                    _hover={{ color: 'orange.600' }}
+                  >
+                    Register
+                  </Box>
+                </Link>
+              </Box>
             </Stack>
           </Box>
         </Stack>
