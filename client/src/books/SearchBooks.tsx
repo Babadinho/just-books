@@ -225,8 +225,8 @@ const SearchBooks = () => {
                     searches.length > 0 &&
                     searches.map((search: any) => (
                       <Text
-                      display='flex'
-                      alignItems='center'
+                        display='flex'
+                        alignItems='center'
                         textAlign='center'
                         fontSize='1rem'
                         mr='0.5rem'
@@ -328,19 +328,23 @@ const SearchBooks = () => {
           )}
         </Flex>
         {q !== undefined && search && search.length === 0 && (
-          <Flex
-            flexDir='column'
-            textAlign='center'
-            justifyContent='center'
-            mt='4rem'
-          >
-            <Text fontSize='4rem'>
-              <i className='fa-solid fa-book'></i>
-            </Text>
-            <Text fontSize='1.5rem' color='orange.500'>
-              Loading books.....
-            </Text>
-          </Flex>
+          // <Flex
+          //   flexDir='column'
+          //   textAlign='center'
+          //   justifyContent='center'
+          //   mt='4rem'
+          // >
+          //   <Text fontSize='4rem'>
+          //     <i className='fa-solid fa-book'></i>
+          //   </Text>
+          //   <Text fontSize='1.5rem' color='orange.500'>
+          //     Loading books.....
+          //   </Text>
+          // </Flex>
+          <Box className='loading-container' mt='4.5rem'>
+            <Box className='loading'></Box>
+            <Box id='loading-text'>Loading books</Box>
+          </Box>
         )}
         <SimpleGrid
           minChildWidth={{ base: 'auto', md: '22rem' }}

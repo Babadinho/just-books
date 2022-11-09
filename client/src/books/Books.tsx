@@ -1,4 +1,4 @@
-import { Box, chakra, Text, SimpleGrid, Flex } from '@chakra-ui/react';
+import { Box, chakra, Text, SimpleGrid } from '@chakra-ui/react';
 import { useContext } from 'react';
 import BookCard from '../components/BookCard';
 import Header from '../components/Header';
@@ -21,20 +21,24 @@ const Books = () => {
         mx='auto'
       >
         {!books && (
-          <Flex
-            flexDir='column'
-            textAlign='center'
-            justifyContent='center'
-            mt='1rem'
-            mb='5rem'
-          >
-            <Text fontSize='4rem'>
-              <i className='fa-solid fa-book'></i>
-            </Text>
-            <Text fontSize='1.5rem' color='orange.500'>
-              Loading books.....
-            </Text>
-          </Flex>
+          // <Flex
+          //   flexDir='column'
+          //   textAlign='center'
+          //   justifyContent='center'
+          //   mt='1rem'
+          //   mb='5rem'
+          // >
+          //   <Text fontSize='4rem'>
+          //     <i className='fa-solid fa-book'></i>
+          //   </Text>
+          //   <Text fontSize='1.5rem' color='orange.500'>
+          //     Loading books.....
+          //   </Text>
+          // </Flex>
+          <Box className='loading-container'>
+            <Box className='loading'></Box>
+            <Box id='loading-text'>Loading books</Box>
+          </Box>
         )}
         <chakra.h1
           mb={'3.5rem'}
