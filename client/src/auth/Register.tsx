@@ -73,9 +73,15 @@ const Register = () => {
 
   return (
     <>
-      <Flex align={'center'} justify={'center'}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}
-          w={{ sm: 'full', md: '60vh' }}>
+      <Flex align={'center'} justify={'center'} mt='2rem'>
+        <Stack
+          spacing={8}
+          mx={'auto'}
+          maxW={'lg'}
+          py={12}
+          px={4}
+          w={{ sm: 'full', md: '55vh' }}
+        >
           <Stack align={'center'}>
             <Heading fontSize={'3xl'} color={'orange.500'}>
               Register an Account
