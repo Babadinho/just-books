@@ -37,7 +37,7 @@ const Header = () => {
       px={4}
       pt={{ base: '3rem', md: '6rem' }}
       pb={{ base: '0.5rem', md: '0.5rem' }}
-      mb='3rem'
+      mb='3.5rem'
       mx='auto'
       bgGradient='linear(to-b, orange.50, #fdfdfc)'
     >
