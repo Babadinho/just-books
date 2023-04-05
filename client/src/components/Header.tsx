@@ -39,6 +39,7 @@ const Header = () => {
       pb={{ base: '0.5rem', md: '0.5rem' }}
       mb='3.5rem'
       mx='auto'
+      width='100%'
       bgGradient='linear(to-b, orange.50, #fdfdfc)'
     >
       <Box
