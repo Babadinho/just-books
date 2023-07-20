@@ -29,6 +29,7 @@ const Login = () => {
     password: '',
   });
   const [loading, setLoading] = useState(false);
+  const [loginText, setLoginText] = useState<string>('Login');
 
   const { username, password } = values;
 
@@ -38,6 +39,7 @@ const Login = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setLoginText('Please wait..');
     try {
       const res = await login({
         username: username,
@@ -58,6 +60,7 @@ const Login = () => {
     } catch (error: any) {
       message.error(error.response.data, 4);
       setLoading(false);
+      setLoginText('Login');
     }
   };
 
@@ -121,7 +124,7 @@ const Login = () => {
                       <span className='sr-only'>Loading...</span>
                     </div>
                   ) : (
-                    'Login'
+                    loginText
                   )}
                 </Button>
               </Stack>

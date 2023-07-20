@@ -10,7 +10,7 @@ import {
 const Footer = () => {
   return (
     <Box
-      mt='auto'
+      mt='6rem'
       px={{ base: '1rem', md: '5rem', xl: '12rem' }}
       borderTop={1}
       borderStyle={'solid'}

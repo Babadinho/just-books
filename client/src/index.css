@@ -201,7 +201,7 @@ width: 17rem !important;
 
 @media only screen and (max-width: 450px) {
   .float-button{
-    bottom: 5.5rem;
+    bottom: 4rem;
     right: 1.25rem;
   }
 }

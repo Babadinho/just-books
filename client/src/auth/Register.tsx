@@ -33,6 +33,7 @@ const Register = () => {
     confirm_password: '',
   });
   const [loading, setLoading] = useState(false);
+  const [registerText, setRegisterText] = useState<string>('Register');
 
   const { username, password, confirm_password } = values;
 
@@ -45,6 +46,7 @@ const Register = () => {
     if (password !== confirm_password) {
       return message.error('Password does not match', 4);
     }
+    setRegisterText('Please wait..');
     try {
       const res = await register({
         username: username,
@@ -68,6 +70,7 @@ const Register = () => {
     } catch (error: any) {
       message.error(error.response.data, 4);
       setLoading(false);
+      setRegisterText('Register');
     }
   };
 
@@ -140,7 +143,7 @@ const Register = () => {
                       <span className='sr-only'>Loading...</span>
                     </div>
                   ) : (
-                    'Register'
+                    registerText
                   )}
                 </Button>
               </Stack>
