@@ -113,19 +113,23 @@ const MyBooks = ({ loadBooks }: any) => {
           />
         </DrawerContent>
       </Drawer>
-      <Box transition='.5s ease'>
+      <Box
+        transition='.5s ease'
+        px={{ base: '1rem', md: '5rem', xl: '12rem' }}
+        borderBottom={1}
+        borderStyle={'solid'}
+        borderColor={useColorModeValue('gray.200', 'gray.900')}
+      >
         <Flex
           h={16}
           alignItems={'center'}
           justifyContent={'space-between'}
           bg={useColorModeValue('white', 'gray.800')}
           color={useColorModeValue('gray.600', 'white')}
-          borderBottom={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.900')}
           minH={'60px'}
           py={{ base: 2 }}
-          px={{ base: 4, md: 20, xl: 40 }}
+          maxW='7xl'
+          mx='auto'
         >
           <Box
             fontFamily={'heading'}
@@ -138,7 +142,9 @@ const MyBooks = ({ loadBooks }: any) => {
           >
             <Link to='/' className='logo' onClick={loadBooks}>
               <Flex alignItems={'center'}>
-                <i className='fa-solid fa-book logo-book'></i>{' '}
+                <Box as='span' pb='0.2rem'>
+                  <i className='fa-solid fa-book logo-book'></i>{' '}
+                </Box>
                 <Text ml='1'>Justbooks</Text>
               </Flex>
             </Link>
@@ -172,11 +178,14 @@ const MyBooks = ({ loadBooks }: any) => {
             />
           </HStack>
         </Flex>
+      </Box>
+      <Box transition='.5s ease' px={{ base: '1rem', md: '5rem', xl: '12rem' }}>
         <Box
           py={{ base: 5 }}
-          px={{ base: 4, md: '5rem', xl: '8rem' }}
           display='flex'
           justifyContent='center'
+          maxW='7xl'
+          mx='auto'
         >
           <Box display={{ base: 'none', md: 'block' }} w='16rem'>
             <Sidebar
@@ -191,8 +200,6 @@ const MyBooks = ({ loadBooks }: any) => {
             as='main'
             w={{
               base: 'full',
-              md: 11 / 12,
-              xl: 9 / 12,
             }}
           >
             <SimpleGrid
@@ -244,8 +251,8 @@ const MyBooks = ({ loadBooks }: any) => {
         </Box>
       </Box>
       <Link className='float-button' to='/search'>
-    <i className="fa-solid fa-magnifying-glass my-float"></i>
-  </Link>
+        <i className='fa-solid fa-magnifying-glass my-float'></i>
+      </Link>
     </Box>
   );
 };

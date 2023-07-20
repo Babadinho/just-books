@@ -13,19 +13,22 @@ const NavBar = ({ loadBooks }: any) => {
 
   return (
     <>
-      <Box>
+      <Box
+        px={{ base: '1rem', md: '5rem', xl: '12rem' }}
+        bg={useColorModeValue('white', 'gray.800')}
+        color={useColorModeValue('gray.600', 'white')}
+        borderBottom={1}
+        borderStyle={'solid'}
+        borderColor={useColorModeValue('gray.200', 'gray.900')}
+      >
         <Flex
           h={16}
           alignItems={'center'}
           justifyContent={'space-between'}
-          bg={useColorModeValue('white', 'gray.800')}
-          color={useColorModeValue('gray.600', 'white')}
-          borderBottom={1}
-          borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.900')}
           minH={'60px'}
           py={{ base: 2 }}
-          px={{ base: 4, md: 20, xl: 40 }}
+          mx='auto'
+          maxW='7xl'
         >
           <HStack spacing={8} alignItems={'center'}>
             <Box

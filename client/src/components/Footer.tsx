@@ -9,20 +9,23 @@ import {
 
 const Footer = () => {
   return (
-    <Box mt='auto'>
+    <Box
+      mt='auto'
+      px={{ base: '1rem', md: '5rem', xl: '12rem' }}
+      borderTop={1}
+      borderStyle={'solid'}
+      borderColor={useColorModeValue('gray.200', 'gray.900')}
+    >
       <Flex
         w='full'
+        maxW='7xl'
         flexDir='row'
         alignItems='center'
         justifyContent='center'
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
-        borderTop={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
         h={'60px'}
-        px={{ base: 4, md: 20, xl: 40 }}
-        mt='5rem'
+        mx='auto'
       >
         <Flex
           w='full'
@@ -37,7 +40,7 @@ const Footer = () => {
             color='gray.800'
             _dark={{ color: 'white' }}
           >
-            Justbooks © 2022. All Rights Reserved
+            Justbooks © 2023. All Rights Reserved
           </chakra.p>
 
           <chakra.p color='gray.800' _dark={{ color: 'white' }}>

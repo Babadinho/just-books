@@ -18,6 +18,7 @@ const Books = () => {
           md: 11 / 12,
           xl: 9 / 12,
         }}
+        maxW='7xl'
         mx='auto'
       >
         {!books && (

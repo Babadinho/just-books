@@ -129,9 +129,10 @@ const ViewBook = () => {
         {book && (
           <Flex
             my='5rem'
-            mx={{ base: '0.6rem', md: '5rem', xl: '10rem' }}
             justifyContent='center'
             flexDir={{ base: 'column', md: 'column', lg: 'row' }}
+            maxW='7xl'
+            mx='auto'
           >
             <Box
               bg='white'

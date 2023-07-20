@@ -53,6 +53,7 @@ const Header = () => {
           md: 'center',
         }}
         mx='auto'
+        maxW='7xl'
       >
         <chakra.h1
           mb={3}

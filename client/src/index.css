@@ -123,8 +123,8 @@ width: 17rem !important;
 	position: fixed;
 	width: 3.5rem;
 	height: 3.5rem;
-	bottom: 2.5rem;
-	right: 1.25rem;
+	bottom: 6.5rem;
+	right: 3.25rem;
 	background-color: #dd6b20;
   text-decoration: none;
 	border-radius: 3.125rem;
@@ -197,4 +197,11 @@ width: 17rem !important;
   text-align: center;
   top: 0;
   width: 100px;
+}
+
+@media only screen and (max-width: 450px) {
+  .float-button{
+    bottom: 5.5rem;
+    right: 1.25rem;
+  }
 }
