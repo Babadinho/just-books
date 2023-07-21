@@ -21,13 +21,14 @@ import { message, Select, Popconfirm } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../actions/auth';
-import { addBook, removeBook } from '../actions/book';
-import { ListContext, MyBooksContext } from '../context/Context';
+import { addBook, getBooks, removeBook } from '../actions/book';
+import { BookContext, ListContext, MyBooksContext } from '../context/Context';
 
 const BookCard = ({ ...book }) => {
   const { user, token } = isAuthenticated();
   const { list } = useContext(ListContext);
   const { myBooks, setMyBooks } = useContext(MyBooksContext);
+  const { setBooks } = useContext(BookContext);
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [loading, setLoading] = useState<Boolean>(false);
   const [selectOption, setSelectOption] = useState<string>('');
@@ -71,9 +72,13 @@ const BookCard = ({ ...book }) => {
   const handleRemoveBook = async () => {
     try {
       const res = await removeBook(user._id, { bookId: book.id }, token);
+      const books = await getBooks();
       if (res.data) {
         setMyBooks(res.data);
         message.success('Book removed from your list', 4);
+      }
+      if (books.data) {
+        setBooks(books.data);
       }
     } catch (error: any) {
       if (error.response.status === 400) message.error(error.response.data, 4);
@@ -86,7 +91,7 @@ const BookCard = ({ ...book }) => {
   }, [myBooks]);
 
   return (
-    <>
+    <Box transition='.5s ease'>
       <Popover
         placement='top-end'
         isOpen={isOpen}
@@ -409,7 +414,7 @@ const BookCard = ({ ...book }) => {
           </PopoverFooter>
         </PopoverContent>
       </Popover>
-    </>
+    </Box>
   );
 };
 

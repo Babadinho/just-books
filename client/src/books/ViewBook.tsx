@@ -119,7 +119,7 @@ const ViewBook = () => {
   }, [myBooks]);
 
   return (
-    <>
+    <Box px={{ base: '1rem', md: '5rem', xl: '12rem' }}>
       <Popover
         placement='top-end'
         isOpen={isOpen}
@@ -138,15 +138,16 @@ const ViewBook = () => {
               bg='white'
               shadow='sm'
               rounded='md'
-              maxH={'38rem'}
+              maxH={'90rem'}
               overflow='hidden'
               mr={{ md: '1rem' }}
-              mb='1rem'
+              pb='1rem'
               w={{ base: '100%', md: '100%', lg: 'sm' }}
+              h='fit-content'
             >
               <Image
                 w='full'
-                h={60}
+                // h={'100%'}
                 fit='fill'
                 objectPosition='center'
                 src={book.imageLinks && book.imageLinks.thumbnail}
@@ -339,7 +340,7 @@ const ViewBook = () => {
                   }}
                   fontSize='0.94rem'
                   lineHeight='1.65rem'
-                  textAlign='justify'
+                  // textAlign='justify'
                 >
                   {book.description &&
                     book.description.replace(/(<([^>]+)>)/gi, '')}
@@ -554,7 +555,7 @@ const ViewBook = () => {
           </PopoverFooter>
         </PopoverContent>
       </Popover>
-    </>
+    </Box>
   );
 };
 

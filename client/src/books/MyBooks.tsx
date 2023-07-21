@@ -31,7 +31,7 @@ const MyBooks = ({ loadBooks }: any) => {
   const { myBooks } = useContext(MyBooksContext);
   const [activeListBooks, setActiveListBooks] = useState<Array<{}> | null>();
   const [current, setCurrent] = useState(1);
-  const pageSize = 8;
+  const pageSize = 10;
   const offset = (current - 1) * pageSize;
   const books_data =
     activeListBooks && activeListBooks.slice(offset, offset + pageSize);

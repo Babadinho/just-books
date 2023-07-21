@@ -179,7 +179,7 @@ const Comments = ({ params }: any) => {
   }, [setComments]);
 
   return (
-    <Box mt='4rem'>
+    <Box mt='6rem'>
       {user && token ? (
         <>
           <Textarea

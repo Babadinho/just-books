@@ -88,7 +88,7 @@ const Sidebar = (
     <>
       <Box
         position={{ md: 'relative' }}
-        h={{ sm: '100vh', md: '80vh' }}
+        h={{ sm: '100vh', md: '75vh' }}
         shadow={{ base: 'none', md: 'md' }}
         bg='white'
         _dark={{ bg: 'gray.800' }}
