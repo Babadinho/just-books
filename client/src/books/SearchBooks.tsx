@@ -184,13 +184,14 @@ const SearchBooks = () => {
 
       <Box
         as='main'
-        px={{ base: '1rem', md: '0' }}
+        px={{ base: '1rem' }}
         w={{
           base: 'full',
           md: 11 / 12,
           xl: 9 / 12,
         }}
         mx='auto'
+        maxW='7xl'
       >
         {!search && searches && searches.length > 0 && (
           <Box mt='1rem'>
